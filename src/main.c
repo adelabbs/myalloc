@@ -4,19 +4,19 @@
 
 extern char *optarg;
 extern int optind;
-extern MemorySpace memory;
 
 void displayMemorySpace(){
   printf("TOTAL SPACE = %d\n", getMemorySize(memory));
   printf("AVAILABLE SPACE = %d\n", getMemoryAvailableSpace(memory));
-  printf("Block\t|Position\t|Size");
-  BlockList bl = getBlockList(memory);
+  printf("Block\t|Position\t|Size\n");
+  BlockList bl = memory.blocks;
   int i = 0;
   while(!isEmptyBlockList(bl)){
-    printf("%d\t%d\t%d\t", i, getBlockPosition(bl), getBlockSize(bl));
+    printf("%d\t\t| %d\t\t\t| %d\n", i, getBlockPosition(bl), getBlockSize(bl));
     i++;
+    bl = getNextBlock(bl);
   }
-  printf("--------------\n");
+  printf("--------------------------\n");
 }
 
 int firstFit(int blockSize){
@@ -25,17 +25,18 @@ int firstFit(int blockSize){
     exit(EXIT_FAILURE);
   } 
   int position = 0;
-  BlockList bl = getBlockList(memory);
-  if(!isEmptyBlockList(bl)) {
-    while(getNextBlock(bl) != NULL && getSizeBetweenNextBLock(bl) < blockSize){
-      bl = getNextBlock(bl);
+  //To set global memory attributes, use the adress and &.
+  BlockList *bl = &(memory.blocks);
+  if(!isEmptyBlockList(*bl)) {
+    while(getNextBlock(*bl) != NULL && getSizeBetweenNextBLock(*bl) < blockSize){
+      *bl = getNextBlock(*bl);
       position++;
     }
-    //TODO traiter no space found
+    //TODO handle no space found
   }
-  printf("YEP\n");
-  addBlock(&bl, position, blockSize);
-  printf("%d\n", getBlockPosition(bl));
+  addBlock(bl, position, blockSize);
+  setMemoryAvailableSpace(&memory, blockSize);
+  return 0;
 }
 
 /*Test*/

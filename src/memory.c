@@ -46,6 +46,10 @@ int getMemoryAvailableSpace(MemorySpace m) {
     return m.availableSpace;
 }
 
+void setMemoryAvailableSpace(MemorySpace *m, int size) {
+  m->availableSpace = getMemoryAvailableSpace(*m) - size;
+}
+
 void *getMemoryBlock(MemorySpace m) {
     return m.block;
 }
@@ -78,6 +82,7 @@ int getSizeBetweenNextBLock(BlockList bl) {
     return getBlockPosition(getNextBlock(bl)) - (getBlockPosition(bl) + getBlockSize(bl));
 }
 
+
 void addBlock(BlockList *bl, int position, int size) {
     BlockList block;
     block = (BlockList)malloc(sizeof(struct block));
@@ -89,6 +94,7 @@ void addBlock(BlockList *bl, int position, int size) {
     block->size = size;
     block->next = *bl;
     *bl = block;
+    
 }
 
 

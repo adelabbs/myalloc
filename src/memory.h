@@ -23,6 +23,7 @@ extern MemorySpace memory;
 /* MemorySpace functions */
 int getMemorySize(MemorySpace m);
 int getMemoryAvailableSpace(MemorySpace m);
+void setMemoryAvailableSpace(MemorySpace *m, int size);
 void *getMemoryBlock(MemorySpace m);
 BlockList getBlockList(MemorySpace m);
 
