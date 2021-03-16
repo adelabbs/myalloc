@@ -3,28 +3,45 @@
 #include "memory.h"
 
 void removeBlockHead(BlockList *bl);
+void freeBlockList(BlockList *bl);
+
+MemorySpace memory;
 
 int initMemory(int nBytes) {
-
+  /* MemorySpace Settings*/
+  memory.size = nBytes;
+  memory.availableSpace = nBytes;
+  /* Main memory bloc allocation*/
+  void * block = malloc(nBytes);
+  if(block == NULL) {
+    perror("Couldn't allocate memory in function initMemory()");
+    exit(EXIT_FAILURE);
+  }
+  memory.block  = block;
+  memory.blocks = initBlockList();
+  return 0; 
 }
 
 void *myalloc(int nBytes) {
-
+  //TODO
 }
 
 int myfree(void *p) {
-
+  //TODO
 
 }
 
 int freeMemory() {
-
+  BlockList *bl = &(memory.blocks);
+  freeBlockList(bl);
+  free(memory.block);
+  //memory = NULL; //?
 }
-
 
 int getMemorySize(MemorySpace *m) {
     return m->size;
 }
+
 int getMemoryAvailableSpace(MemorySpace *m) {
     return m->availableSpace;
 }
@@ -64,6 +81,10 @@ int getSizeBetweenNextBLock(BlockList bl) {
 void addBlock(BlockList *bl, int position, int size) {
     BlockList block;
     block = (BlockList)malloc(sizeof(struct block));
+    if(block == NULL){
+      perror("Couldn't allocate memory in function addBlock()");
+      exit(EXIT_FAILURE);
+    }
     block->position = position;
     block->size = size;
     block->next = *bl;
@@ -87,4 +108,10 @@ void removeBlock(BlockList *bl, int position) {
             removeBlock(&((*bl)->next), position);
         }
     }
+}
+
+void freeBlockList(BlockList *bl){
+  while(!isEmptyBlockList(*bl)){
+    removeBlockHead(bl);
+  }
 }
