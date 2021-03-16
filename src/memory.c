@@ -38,20 +38,20 @@ int freeMemory() {
   //memory = NULL; //?
 }
 
-int getMemorySize(MemorySpace *m) {
-    return m->size;
+int getMemorySize(MemorySpace m) {
+    return m.size;
 }
 
-int getMemoryAvailableSpace(MemorySpace *m) {
-    return m->availableSpace;
+int getMemoryAvailableSpace(MemorySpace m) {
+    return m.availableSpace;
 }
 
-void *getMemoryBlock(MemorySpace *m) {
-    return m->block;
+void *getMemoryBlock(MemorySpace m) {
+    return m.block;
 }
 
-BlockList getBlockList(MemorySpace *m) {
-    return m->blocks;
+BlockList getBlockList(MemorySpace m) {
+    return m.blocks;
 }
 
 int isEmptyBlockList(BlockList bl) {
@@ -115,3 +115,6 @@ void freeBlockList(BlockList *bl){
     removeBlockHead(bl);
   }
 }
+
+
+

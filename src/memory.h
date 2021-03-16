@@ -18,11 +18,13 @@ typedef struct {
     */
 } MemorySpace;
 
+extern MemorySpace memory;
+
 /* MemorySpace functions */
-int getMemorySize(MemorySpace *m);
-int getMemoryAvailableSpace(MemorySpace *m);
-void *getMemoryBlock(MemorySpace *m);
-BlockList getBlockList(MemorySpace *m);
+int getMemorySize(MemorySpace m);
+int getMemoryAvailableSpace(MemorySpace m);
+void *getMemoryBlock(MemorySpace m);
+BlockList getBlockList(MemorySpace m);
 
 /* BlockList functions */
 /**
