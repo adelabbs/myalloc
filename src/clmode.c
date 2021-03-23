@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "batch.h"
 #include "memory.h"
 #include "options.h"
 
@@ -54,6 +55,7 @@ void interactiveModeHandler() {
 void batchModeHandler() {
     printf("running batch mode\n");
     printf("Interpreted file as %s\n", optarg);
+    batch(optarg);
 }
 
 void cliModeHandler() {

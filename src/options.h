@@ -12,4 +12,14 @@ enum MyAllocModeType {
 #define RUN_BATCH RUN_BATCH
 };
 
+typedef enum {
+  COMMAND_SIZE,
+  COMMAND_ALLOC,
+  COMMAND_FREE,
+  COMMAND_UKN 
+}  CommandType;
+
+#define COMMAND_CODES_COUNT 3
+extern const char *command_codes[COMMAND_CODES_COUNT];
+
 #endif /*_OPTIONS_H_*/
