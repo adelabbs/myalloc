@@ -1,13 +1,19 @@
-all : myalloc
+all : firstfit cli
 
 memory.o : memory.c memory.h
 	gcc -c memory.c
 
-main.o : main.c
-	gcc -c main.c
+testFirstFit.o : testFirstFit.c
+	gcc -c testFirstFit.c
 
-myalloc : memory.o main.o
-	gcc memory.o main.o -o myalloc
-    
+clmode.o : clmode.c memory.h options.h
+	gcc -c clmode.c
+
+firstfit : memory.o testFirstFit.o
+	gcc memory.o testFirstFit.o -o firstfit
+
+cli : memory.o clmode.o
+	gcc memory.o clmode.o -o cli
+
 clean :
-	rm -f myalloc *.o
+	rm -f firstfit cli *.o
