@@ -1,50 +1,70 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "memory.h"
+#include <unistd.h>
+#include "batch.h"
+#include "cli.h"
+#include "util.h"
+
+void display_options();
+void interactiveModeHandler();
+void batchModeHandler();
+void cliModeHandler();
 
 extern char *optarg;
 extern int optind;
 
-void displayMemorySpace(){
-  printf("TOTAL SPACE = %d\n", getMemorySize(memory));
-  printf("AVAILABLE SPACE = %d\n", getMemoryAvailableSpace(memory));
-  printf("Block\t|Position\t|Size\n");
-  BlockList bl = memory.blocks;
-  int i = 0;
-  while(!isEmptyBlockList(bl)){
-    printf("%d\t\t| %d\t\t\t| %d\n", i, getBlockPosition(bl), getBlockSize(bl));
-    i++;
-    bl = getNextBlock(bl);
-  }
-  printf("--------------------------\n");
-}
+int log_fd;
 
-int firstFit(int blockSize){
-  if(getMemoryAvailableSpace(memory) < blockSize){
-    perror("Couldn't allocate block, not enough space");
-    exit(EXIT_FAILURE);
-  } 
-  int position = 0;
-  //To set global memory attributes, use the adress and &.
-  BlockList *bl = &(memory.blocks);
-  if(!isEmptyBlockList(*bl)) {
-    while(getNextBlock(*bl) != NULL && getSizeBetweenNextBLock(*bl) < blockSize){
-      *bl = getNextBlock(*bl);
-      position++;
+int main(int argc, char *argv[]) {
+    char format[] = "hib:c:";
+    int mode = RUN_INTERACTIVE;
+    int option;
+
+    initLog(&log_fd, LOG_PATH_DEFAULT);
+    writeLog("Launching", SEVERITY_DEBUG, log_fd);
+    while ((option = getopt(argc, argv, format)) != -1) {
+        switch (option) {
+        case 'h':
+            display_options(argv[0]);
+            break;
+        case 'i':
+            interactiveModeHandler();
+            break;
+        case 'b':
+            batchModeHandler();
+            break;
+        case 'c':
+            cliModeHandler(argc, argv);
+            break;
+        default:			// All the other options are considered invalid.
+            printf("Invalid command-line options. Please run using -h to list the available options.\n");
+            return 1;
+        }
     }
-    //TODO handle no space found
-  }
-  addBlock(bl, position, blockSize);
-  setMemoryAvailableSpace(&memory, blockSize);
-  return 0;
+    //TODO Call generic run
 }
 
-/*Test*/
-int main(){
-  int sizeMax = 50;
-  int myBloc = 25;
-  initMemory(sizeMax);
-  firstFit(myBloc);
-  displayMemorySpace();
-  return 0;
+void display_options(char *usage) {
+    printf("Usage:\n%s [-hi] or[-b filePath] or [-c] [s:size] ([a:blockSize:blockId] || [f:blockId])^n \n", usage);
+    printf("   -h : display this help\n");
+    printf("   -i : interactive mode\n");
+    printf("   -b : batch mode\n");
+    printf("   -c : command-line mode\n");
+}
+
+void interactiveModeHandler() {
+    writeLog("Running interactive mode", SEVERITY_INFO, log_fd);
+}
+
+void batchModeHandler() {
+    writeLog("Running batch mode", SEVERITY_INFO, log_fd);
+    char log[100];
+    sprintf(log, "Interpreted file as %s", optarg);
+    writeLog(log, SEVERITY_DEBUG, log_fd);
+    batch(optarg);
+}
+
+void cliModeHandler(int argc, char *argv[]) {
+    writeLog("Running cli mode", SEVERITY_INFO, log_fd);
+    cli(argc, argv);
 }

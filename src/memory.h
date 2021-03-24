@@ -26,6 +26,8 @@ int getMemoryAvailableSpace(MemorySpace m);
 void setMemoryAvailableSpace(MemorySpace *m, int size);
 void *getMemoryBlock(MemorySpace m);
 BlockList getBlockList(MemorySpace m);
+void displayMemorySpace();
+int firstFit(int blockSize);
 
 /* BlockList functions */
 /**

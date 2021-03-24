@@ -3,26 +3,32 @@ all : firstfit cli
 memory.o : memory.c memory.h
 	gcc -c memory.c
 
-util.o : util.c util.h
+util.o : util.c util.h types.h
 	gcc -c util.c
 
-options.o : options.c options.h
-	gcc -c options.c
+types.o : types.c types.h
+	gcc -c types.c
+
+command.o : command.c command.h memory.h util.h types.h
+	gcc -c command.c
 
 testFirstFit.o : testFirstFit.c
 	gcc -c testFirstFit.c
 
-batch.o : batch.c batch.h memory.h options.h
+batch.o : batch.c batch.h command.h
 	gcc -c batch.c
 
-clmode.o : clmode.c batch.h memory.h options.h
-	gcc -c clmode.c
+cli.o : cli.c cli.h command.h
+	gcc -c cli.c
+
+main.o : main.c cli.h batch.h util.h
+	gcc -c main.c
 
 firstfit : memory.o testFirstFit.o
 	gcc memory.o testFirstFit.o -o firstfit
 
-cli : memory.o clmode.o batch.o options.o util.o
-	gcc memory.o clmode.o batch.o options.o util.o -o cli
+cli : main.o memory.o cli.o batch.o types.o util.o command.o
+	gcc main.o memory.o batch.o cli.o types.o util.o command.o -o cli
 
 clean :
 	rm -f firstfit cli *.o
