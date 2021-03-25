@@ -17,7 +17,7 @@ int initMemory(int nBytes) {
     perror("Couldn't allocate memory in function initMemory()");
     exit(EXIT_FAILURE);
   }
-  memory.block = block;
+  memory.generalBlock = block;
   memory.blocks = initBlockList();
   return 0;
 }
@@ -35,7 +35,7 @@ int myfree(void *p) {
 int freeMemory() {
   BlockList *bl = &(memory.blocks);
   freeBlockList(bl);
-  free(memory.block);
+  free(memory.generalBlock);
   //memory = NULL; //?
 }
 
@@ -52,7 +52,7 @@ void setMemoryAvailableSpace(MemorySpace *m, int size) {
 }
 
 void *getMemoryBlock(MemorySpace m) {
-  return m.block;
+  return m.generalBlock;
 }
 
 BlockList getBlockList(MemorySpace m) {
@@ -128,7 +128,7 @@ void displayMemorySpace() {
   printf("TOTAL SPACE = %d\n", getMemorySize(memory));
   printf("AVAILABLE SPACE = %d\n", getMemoryAvailableSpace(memory));
   printf("Block\t|Position\t|Size\n");
-  BlockList bl = memory.blocks;
+  BlockList bl = getBlockList(memory);
   int i = 0;
   while (!isEmptyBlockList(bl)) {
     printf("%d\t\t| %d\t\t\t| %d\n", i, getBlockPosition(bl), getBlockSize(bl));

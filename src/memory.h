@@ -10,7 +10,7 @@ typedef struct block {
 typedef struct {
     int size;
     int availableSpace;
-    void *block;
+    void *generalBlock;
     BlockList blocks;
     /*
     pthread_mutex_t lock;

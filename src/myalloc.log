@@ -21,3 +21,21 @@
 [INFO] 2021-03-25 00:05:01 Running cli mode
 [DEBUG] 2021-03-25 00:05:01 Read 's:100'
 [DEBUG] 2021-03-25 00:05:01 Read 'a:15:paul'
+[DEBUG] 2021-03-25 13:16:20 Launching
+[INFO] 2021-03-25 13:16:20 Running batch mode
+[DEBUG] 2021-03-25 13:16:20 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 13:16:20 Read 's:100
+'
+[DEBUG] 2021-03-25 13:16:20 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 13:16:33 Launching
+[INFO] 2021-03-25 13:16:33 Running batch mode
+[DEBUG] 2021-03-25 13:16:33 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 13:16:33 Read 's:100
+'
+[DEBUG] 2021-03-25 13:16:33 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 13:16:52 Launching
+[INFO] 2021-03-25 13:16:52 Running batch mode
+[DEBUG] 2021-03-25 13:16:52 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 13:16:52 Read 's:100
+'
+[DEBUG] 2021-03-25 13:16:52 Read 'a:15:poulet'
