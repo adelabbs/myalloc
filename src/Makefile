@@ -21,14 +21,17 @@ batch.o : batch.c batch.h command.h
 cli.o : cli.c cli.h command.h
 	gcc -c cli.c
 
-main.o : main.c cli.h batch.h util.h
+interactive.o : interactive.c interactive.h
+	gcc -c interactive.c
+
+main.o : main.c cli.h batch.h interactive.h util.h
 	gcc -c main.c
 
 firstfit : memory.o testFirstFit.o
 	gcc memory.o testFirstFit.o -o firstfit
 
-cli : main.o memory.o cli.o batch.o types.o util.o command.o
-	gcc main.o memory.o batch.o cli.o types.o util.o command.o -o cli
+cli : main.o memory.o cli.o batch.o types.o util.o command.o interactive.o
+	gcc main.o memory.o batch.o cli.o types.o util.o command.o interactive.o -o cli
 
 clean :
 	rm -f firstfit cli *.o

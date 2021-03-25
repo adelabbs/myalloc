@@ -39,3 +39,231 @@
 [DEBUG] 2021-03-25 13:16:52 Read 's:100
 '
 [DEBUG] 2021-03-25 13:16:52 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 13:45:30 Launching
+[INFO] 2021-03-25 13:45:30 Running interactive mode
+[DEBUG] 2021-03-25 13:47:39 Launching
+[INFO] 2021-03-25 13:47:39 Running interactive mode
+[DEBUG] 2021-03-25 13:47:41 Read 'quit'
+[DEBUG] 2021-03-25 13:48:09 Launching
+[INFO] 2021-03-25 13:48:09 Running interactive mode
+[DEBUG] 2021-03-25 13:48:14 Read 's:100'
+[DEBUG] 2021-03-25 13:48:19 Read 'a:15:1'
+[DEBUG] 2021-03-25 13:49:07 Launching
+[DEBUG] 2021-03-25 13:49:18 Launching
+[DEBUG] 2021-03-25 13:49:24 Launching
+[DEBUG] 2021-03-25 13:49:58 Launching
+[INFO] 2021-03-25 13:49:58 Running cli mode
+[DEBUG] 2021-03-25 13:49:58 Read 'a:20:poulet'
+[DEBUG] 2021-03-25 13:50:10 Launching
+[INFO] 2021-03-25 13:50:10 Running batch mode
+[DEBUG] 2021-03-25 13:50:10 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 13:50:10 Read 's:100
+'
+[DEBUG] 2021-03-25 13:50:10 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 13:50:24 Launching
+[INFO] 2021-03-25 13:50:24 Running cli mode
+[DEBUG] 2021-03-25 13:50:24 Read 's:100'
+[DEBUG] 2021-03-25 13:50:37 Launching
+[INFO] 2021-03-25 13:50:37 Running cli mode
+[DEBUG] 2021-03-25 13:50:37 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 13:51:34 Launching
+[INFO] 2021-03-25 13:51:34 Running cli mode
+[DEBUG] 2021-03-25 13:51:34 Read 's:200'
+[DEBUG] 2021-03-25 13:52:16 Launching
+[INFO] 2021-03-25 13:52:16 Running cli mode
+[DEBUG] 2021-03-25 13:52:16 Read 'a:100'
+[DEBUG] 2021-03-25 13:53:27 Launching
+[INFO] 2021-03-25 13:53:27 Running cli mode
+[DEBUG] 2021-03-25 13:53:27 Read 's:200'
+[DEBUG] 2021-03-25 13:53:27 Read 'a:20:poulet'
+[DEBUG] 2021-03-25 13:53:58 Launching
+[INFO] 2021-03-25 13:53:58 Running interactive mode
+[DEBUG] 2021-03-25 13:54:07 Read 'a:100'
+[DEBUG] 2021-03-25 13:54:15 Launching
+[INFO] 2021-03-25 13:54:15 Running interactive mode
+[DEBUG] 2021-03-25 13:54:20 Read 's:100'
+[DEBUG] 2021-03-25 13:54:28 Read 's:100'
+[DEBUG] 2021-03-25 13:54:38 Read 's:100'
+[DEBUG] 2021-03-25 13:54:44 Read 'a:20:adel'
+[DEBUG] 2021-03-25 13:54:52 Read 's:150'
+[DEBUG] 2021-03-25 13:55:01 Read 'a:20:id'
+[DEBUG] 2021-03-25 14:07:26 Launching
+[INFO] 2021-03-25 14:07:26 Running batch mode
+[DEBUG] 2021-03-25 14:07:26 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:07:26 Read 's:100
+'
+[DEBUG] 2021-03-25 14:07:26 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:09:13 Launching
+[INFO] 2021-03-25 14:09:13 Running batch mode
+[DEBUG] 2021-03-25 14:09:13 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:09:13 Read 's:100
+'
+[DEBUG] 2021-03-25 14:09:13 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:10:48 Launching
+[INFO] 2021-03-25 14:10:48 Running batch mode
+[DEBUG] 2021-03-25 14:10:48 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:10:48 Read 's:100
+'
+[DEBUG] 2021-03-25 14:10:48 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:11:28 Launching
+[INFO] 2021-03-25 14:11:28 Running batch mode
+[DEBUG] 2021-03-25 14:11:28 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:11:28 Read 's:100
+'
+[DEBUG] 2021-03-25 14:11:28 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:14:42 Launching
+[INFO] 2021-03-25 14:14:42 Running batch mode
+[DEBUG] 2021-03-25 14:14:42 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:14:42 Read 's:100
+'
+[DEBUG] 2021-03-25 14:14:42 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:16:16 Launching
+[INFO] 2021-03-25 14:16:16 Running batch mode
+[DEBUG] 2021-03-25 14:16:16 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:16:16 Read 's:100
+'
+[DEBUG] 2021-03-25 14:16:16 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:17:31 Launching
+[INFO] 2021-03-25 14:17:31 Running batch mode
+[DEBUG] 2021-03-25 14:17:31 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:17:31 Read 's:100
+'
+[DEBUG] 2021-03-25 14:17:31 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:19:03 Launching
+[INFO] 2021-03-25 14:19:03 Running batch mode
+[DEBUG] 2021-03-25 14:19:03 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:19:03 Read 's:100
+'
+[DEBUG] 2021-03-25 14:19:03 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:20:15 Launching
+[INFO] 2021-03-25 14:20:15 Running batch mode
+[DEBUG] 2021-03-25 14:20:15 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:20:15 Read 's:100
+'
+[DEBUG] 2021-03-25 14:20:15 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:22:00 Launching
+[INFO] 2021-03-25 14:22:00 Running batch mode
+[DEBUG] 2021-03-25 14:22:00 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:22:00 Read 's:100
+'
+[DEBUG] 2021-03-25 14:22:00 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:25:48 Launching
+[INFO] 2021-03-25 14:25:48 Running batch mode
+[DEBUG] 2021-03-25 14:25:48 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:25:48 Read 's:100
+'
+[DEBUG] 2021-03-25 14:25:48 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:27:10 Launching
+[INFO] 2021-03-25 14:27:10 Running batch mode
+[DEBUG] 2021-03-25 14:27:10 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:27:10 Read 's:100
+'
+[DEBUG] 2021-03-25 14:27:10 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:28:47 Launching
+[INFO] 2021-03-25 14:28:47 Running batch mode
+[DEBUG] 2021-03-25 14:28:47 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:28:47 Read 's:100
+'
+[DEBUG] 2021-03-25 14:28:47 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:29:24 Launching
+[INFO] 2021-03-25 14:29:24 Running batch mode
+[DEBUG] 2021-03-25 14:29:24 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:29:24 Read 's:100
+'
+[DEBUG] 2021-03-25 14:29:24 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:29:25 Launching
+[INFO] 2021-03-25 14:29:25 Running batch mode
+[DEBUG] 2021-03-25 14:29:25 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:29:25 Read 's:100
+'
+[DEBUG] 2021-03-25 14:29:25 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:30:02 Launching
+[INFO] 2021-03-25 14:30:02 Running batch mode
+[DEBUG] 2021-03-25 14:30:02 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:30:02 Read 's:100
+'
+[DEBUG] 2021-03-25 14:30:02 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:30:17 Launching
+[INFO] 2021-03-25 14:30:17 Running batch mode
+[DEBUG] 2021-03-25 14:30:17 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:30:17 Read 's:100
+'
+[DEBUG] 2021-03-25 14:30:17 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:32:02 Launching
+[INFO] 2021-03-25 14:32:02 Running batch mode
+[DEBUG] 2021-03-25 14:32:02 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:32:02 Read 's:100
+'
+[DEBUG] 2021-03-25 14:32:02 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:41:53 Launching
+[INFO] 2021-03-25 14:41:53 Running batch mode
+[DEBUG] 2021-03-25 14:41:53 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:41:53 Read 's:100
+'
+[DEBUG] 2021-03-25 14:41:53 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:45:41 Launching
+[INFO] 2021-03-25 14:45:41 Running batch mode
+[DEBUG] 2021-03-25 14:45:41 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:45:41 Read 's:100
+'
+[DEBUG] 2021-03-25 14:45:41 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:46:48 Launching
+[INFO] 2021-03-25 14:46:48 Running batch mode
+[DEBUG] 2021-03-25 14:46:48 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:46:48 Read 's:100
+'
+[DEBUG] 2021-03-25 14:46:48 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:47:34 Launching
+[INFO] 2021-03-25 14:47:34 Running batch mode
+[DEBUG] 2021-03-25 14:47:34 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:47:34 Read 's:100
+'
+[DEBUG] 2021-03-25 14:47:34 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:48:17 Launching
+[INFO] 2021-03-25 14:48:17 Running batch mode
+[DEBUG] 2021-03-25 14:48:17 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:48:17 Read 's:100
+'
+[DEBUG] 2021-03-25 14:48:17 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:49:09 Launching
+[INFO] 2021-03-25 14:49:09 Running batch mode
+[DEBUG] 2021-03-25 14:49:09 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:49:09 Read 's:100
+'
+[DEBUG] 2021-03-25 14:49:09 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:50:04 Launching
+[INFO] 2021-03-25 14:50:04 Running batch mode
+[DEBUG] 2021-03-25 14:50:04 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:50:04 Read 's:100
+'
+[DEBUG] 2021-03-25 14:50:04 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:56:47 Launching
+[INFO] 2021-03-25 14:56:47 Running batch mode
+[DEBUG] 2021-03-25 14:56:47 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:56:47 Read 's:100
+'
+[DEBUG] 2021-03-25 14:56:47 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 14:58:04 Launching
+[INFO] 2021-03-25 14:58:04 Running batch mode
+[DEBUG] 2021-03-25 14:58:04 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 14:58:04 Read 's:100
+'
+[DEBUG] 2021-03-25 14:58:04 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 15:00:35 Launching
+[INFO] 2021-03-25 15:00:35 Running batch mode
+[DEBUG] 2021-03-25 15:00:35 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 15:00:35 Read 's:100
+'
+[DEBUG] 2021-03-25 15:00:35 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 15:08:42 Launching
+[INFO] 2021-03-25 15:08:42 Running batch mode
+[DEBUG] 2021-03-25 15:08:42 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 15:08:42 Read 's:100
+'
+[DEBUG] 2021-03-25 15:08:42 Read 'a:15:poulet'
+[DEBUG] 2021-03-25 15:12:15 Launching
+[INFO] 2021-03-25 15:12:15 Running batch mode
+[DEBUG] 2021-03-25 15:12:15 Interpreted file as superconf.conf
+[DEBUG] 2021-03-25 15:12:15 Read 's:100
+'
+[DEBUG] 2021-03-25 15:12:15 Read 'a:15:poulet'

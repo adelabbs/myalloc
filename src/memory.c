@@ -4,6 +4,7 @@
 
 void removeBlockHead(BlockList *bl);
 void freeBlockList(BlockList *bl);
+int countBlocks(BlockList bl);
 
 MemorySpace memory;
 
@@ -23,34 +24,20 @@ int initMemory(int nBytes) {
 }
 
 void *myalloc(int nBytes) {
-  firstFit(nBytes);
+  int position = firstFit(nBytes);
   displayMemorySpace();
 }
 
 int myfree(void *p) {
   /* Check if the pointer is valid*/
-  if(&p == NULL) {
+  if(p == NULL) {
     perror("Couldn't find the block in function myfree()");
     exit(EXIT_FAILURE);
   }
+  BlockList *bl = &(memory.blocks);
+  int position = p - getMemoryBlock(memory);
   /* Partial search of the block in the blockList*/
-  BlockList bl = getBlockList(memory);
-  int cpt = 0;
-  while(p != bl && cpt < getBlockSize(bl)) {
-    bl = getNextBlock(bl);
-    cpt++;
-  }
-  
-  if(getNextBlock(bl) != NULL) {
-    /* Modifiy chain  and partial research of the previous block*/
-    BlockList previousBlock = getBlockList(memory);
-    while(getNextBlock(previousBlock) != bl) {
-      previousBlock = getNextBlock(previousBlock);      
-    }
-    previousBlock->next = getNextBlock(bl);
-  }
-  /* Set the block to null */
-  bl = NULL;
+  removeBlock(bl, position);
 }
 
 int freeMemory() {
@@ -69,7 +56,7 @@ int getMemoryAvailableSpace(MemorySpace m) {
 }
 
 void setMemoryAvailableSpace(MemorySpace *m, int size) {
-  m->availableSpace = getMemoryAvailableSpace(*m) - size;
+  m->availableSpace = size;
 }
 
 void *getMemoryBlock(MemorySpace m) {
@@ -116,25 +103,30 @@ void addBlock(BlockList *bl, int position, int size) {
   block->size = size;
   block->next = *bl;
   *bl = block;
-
 }
 
 
 void removeBlockHead(BlockList *bl) {
   BlockList tmp;
   tmp = *bl;
+  int size = getBlockSize(*bl);
   *bl = getNextBlock(*bl);
   free(tmp);
+  setMemoryAvailableSpace(&memory, getMemoryAvailableSpace(memory) + size);
+}
+
+BlockList *searchBlock(BlockList *bl, int position){
+  if(isEmptyBlockList(*bl) || position == 0){
+    return bl;
+  }else{
+    searchBlock(&((*bl) -> next), position - getBlockSize(*bl));
+  }
 }
 
 void removeBlock(BlockList *bl, int position) {
-  if (!isEmptyBlockList(*bl)) {
-    if (getBlockPosition(*bl) == position) {
-      removeBlockHead(bl);
-    }
-    else {
-      removeBlock(&((*bl)->next), position);
-    }
+  BlockList *block;
+  if((block = searchBlock(bl, position)) != NULL){
+    removeBlockHead(block);
   }
 }
 
@@ -142,6 +134,15 @@ void freeBlockList(BlockList *bl) {
   while (!isEmptyBlockList(*bl)) {
     removeBlockHead(bl);
   }
+}
+
+int countBlocks(BlockList bl) {
+  int blocks = 0;
+  while(bl != NULL) {
+    bl = getNextBlock(bl);
+    blocks++;
+  }
+  return blocks;
 }
 
 
@@ -175,6 +176,6 @@ int firstFit(int blockSize) {
     //TODO handle no space found
   }
   addBlock(bl, position, blockSize);
-  setMemoryAvailableSpace(&memory, blockSize);
-  return 0;
+  setMemoryAvailableSpace(&memory, getMemoryAvailableSpace(memory) - blockSize);
+  return position;
 }

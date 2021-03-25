@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "batch.h"
 #include "cli.h"
+#include "interactive.h"
 #include "util.h"
 
 void display_options();
@@ -54,6 +55,7 @@ void display_options(char *usage) {
 
 void interactiveModeHandler() {
     writeLog("Running interactive mode", SEVERITY_INFO, log_fd);
+    interactiveMode();
 }
 
 void batchModeHandler() {
