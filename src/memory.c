@@ -28,8 +28,29 @@ void *myalloc(int nBytes) {
 }
 
 int myfree(void *p) {
-  //TODO
-
+  /* Check if the pointer is valid*/
+  if(&p == NULL) {
+    perror("Couldn't find the block in function myfree()");
+    exit(EXIT_FAILURE);
+  }
+  /* Partial search of the block in the blockList*/
+  BlockList bl = getBlockList(memory);
+  int cpt = 0;
+  while(p != bl && cpt < getBlockSize(bl)) {
+    bl = getNextBlock(bl);
+    cpt++;
+  }
+  
+  if(getNextBlock(bl) != NULL) {
+    /* Modifiy chain  and partial research of the previous block*/
+    BlockList previousBlock = getBlockList(memory);
+    while(getNextBlock(previousBlock) != bl) {
+      previousBlock = getNextBlock(previousBlock);      
+    }
+    previousBlock->next = getNextBlock(bl);
+  }
+  /* Set the block to null */
+  bl = NULL;
 }
 
 int freeMemory() {
