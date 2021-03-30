@@ -184,3 +184,73 @@ int firstFit(int blockSize) {
   setMemoryAvailableSpace(&memory, getMemoryAvailableSpace(memory) - blockSize);
   return position;
 }
+
+int nextFit(int blockSize) {
+  if (getMemoryAvailableSpace(memory) < blockSize) {
+    perror("Couldn't allocate block, not enough space");
+    exit(EXIT_FAILURE);
+  }
+  int position = countBlocks(getBlockList(memory));
+  //To set global memory attributes, use the adress and &.
+  BlockList *bl = &(memory.blocks);
+  if (!isEmptyBlockList(*bl)) {
+    while (getNextBlock(*bl) != NULL && getSizeBetweenNextBLock(*bl) < blockSize) {
+      *bl = getNextBlock(*bl);
+      position--;
+    }
+    //TODO handle no space found
+  }
+  addBlock(bl, position, blockSize);
+  setMemoryAvailableSpace(&memory, getMemoryAvailableSpace(memory) - blockSize);
+  return position;
+}
+
+int bestFit(int blockSize) {}
+  if (getMemoryAvailableSpace(memory) < blockSize) {
+     perror("Couldn't allocate block, not enough space");
+     exit(EXIT_FAILURE);
+  }
+  int temp, lowest = getMemoryAvailableSpace(memory);
+  int position = 0;
+  int inserPos = 0;
+  BlockList *bl = &(memory.blocks);
+  if (!isEmptyBlockList(*bl)) {
+    while (getNextBlock(*bl) != NULL) {
+      temp = getSizeBetweenNextBLock(*bl) - blockSize;
+      if (lowest > temp) {
+        lowest = temp;
+        inserPos = position;
+      }
+      *bl = getNextBlock(*bl);
+      position++;
+    }
+  }
+  addBlock(bl, inserPos, blockSize);
+  setMemoryAvailableSpace(&memory, getMemoryAvailableSpace(memory) - blockSize);
+  return position;
+}
+
+int worstFit(int blockSize) {}
+  if (getMemoryAvailableSpace(memory) < blockSize) {
+     perror("Couldn't allocate block, not enough space");
+     exit(EXIT_FAILURE);
+  }
+  int temp, highest = getMemoryAvailableSpace(memory);
+  int position = 0;
+  int inserPos = 0;
+  BlockList *bl = &(memory.blocks);
+  if (!isEmptyBlockList(*bl)) {
+    while (getNextBlock(*bl) != NULL) {
+      temp = getSizeBetweenNextBLock(*bl) - blockSize;
+      if (highest < temp) {
+        highest = temp;
+        inserPos = position;
+      }
+      *bl = getNextBlock(*bl);
+      position++;
+    }
+  }
+  addBlock(bl, inserPos, blockSize);
+  setMemoryAvailableSpace(&memory, getMemoryAvailableSpace(memory) - blockSize);
+  return position;
+}
