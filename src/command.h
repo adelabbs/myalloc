@@ -8,9 +8,9 @@
 
 void inputHandler(char *buffer, int maxBufferSize);
 
-void freeCommandHandler(char **fields, int n);
-void allocCommandHandler(char **fields, int n);
-void initCommandHandler(char **fields, int n);
+void freeCommandHandler(char **fields, int n, void **addresses);
+void allocCommandHandler(char **fields, int n, void **addresses);
+void **initCommandHandler(char **fields, int n);
 
 CommandType detectCommand(char **fields, int n);
 char **parseData(char *data, int count, char *separator) ;

@@ -26,11 +26,12 @@ int initMemory(int nBytes) {
 void *myalloc(int nBytes) {
   int position = firstFit(nBytes);
   displayMemorySpace();
+  return getMemoryBlock(memory) + position;
 }
 
 int myfree(void *p) {
   /* Check if the pointer is valid*/
-  if(p == NULL) {
+  if (p == NULL) {
     perror("Couldn't find the block in function myfree()");
     exit(EXIT_FAILURE);
   }
@@ -38,6 +39,8 @@ int myfree(void *p) {
   int position = p - getMemoryBlock(memory);
   /* Partial search of the block in the blockList*/
   removeBlock(bl, position);
+  displayMemorySpace();
+  return 0;
 }
 
 int freeMemory() {
@@ -45,6 +48,7 @@ int freeMemory() {
   freeBlockList(bl);
   free(memory.generalBlock);
   //memory = NULL; //?
+  return 0;
 }
 
 int getMemorySize(MemorySpace m) {
@@ -115,17 +119,18 @@ void removeBlockHead(BlockList *bl) {
   setMemoryAvailableSpace(&memory, getMemoryAvailableSpace(memory) + size);
 }
 
-BlockList *searchBlock(BlockList *bl, int position){
-  if(isEmptyBlockList(*bl) || position == 0){
+BlockList *searchBlock(BlockList *bl, int position) {
+  if (isEmptyBlockList(*bl) || position == 0) {
     return bl;
-  }else{
-    searchBlock(&((*bl) -> next), position - getBlockSize(*bl));
+  }
+  else {
+    searchBlock(&((*bl)->next), position - getBlockSize(*bl));
   }
 }
 
 void removeBlock(BlockList *bl, int position) {
   BlockList *block;
-  if((block = searchBlock(bl, position)) != NULL){
+  if ((block = searchBlock(bl, position)) != NULL) {
     removeBlockHead(block);
   }
 }
@@ -138,7 +143,7 @@ void freeBlockList(BlockList *bl) {
 
 int countBlocks(BlockList bl) {
   int blocks = 0;
-  while(bl != NULL) {
+  while (bl != NULL) {
     bl = getNextBlock(bl);
     blocks++;
   }

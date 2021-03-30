@@ -7,7 +7,7 @@
 #include "util.h"
 #include "types.h"
 
-int readSize(char *sizeField);
+int readPositiveInt(char *field);
 extern int log_fd;
 
 void inputHandler(char *buffer, int maxBufferSize) {
@@ -22,42 +22,52 @@ void inputHandler(char *buffer, int maxBufferSize) {
     }
 
     CommandType command = detectCommand(fields, FIELDS_COUNT);
-
+    void **addresses;
     switch (command) {
     case COMMAND_INIT:
-        initCommandHandler(fields, FIELDS_COUNT);
+        addresses = initCommandHandler(fields, FIELDS_COUNT);
         break;
     case COMMAND_ALLOC:
-        allocCommandHandler(fields, FIELDS_COUNT);
+        allocCommandHandler(fields, FIELDS_COUNT, addresses);
         break;
     case COMMAND_FREE:
-        freeCommandHandler(fields, FIELDS_COUNT);
+        freeCommandHandler(fields, FIELDS_COUNT, addresses);
         break;
-        //TODO add default
     }
 }
 
-void initCommandHandler(char **fields, int n) {
+void **initCommandHandler(char **fields, int n) {
     char *sizeField = fields[1];
     int size;
-    if ((size = readSize(sizeField)) >= 0) {
+    void **addresses = NULL;
+    if ((size = readPositiveInt(sizeField)) >= 0) {
         initMemory(size);
+        addresses = (void **)malloc(size * sizeof(void *));
+        if (addresses == NULL) {
+            writeLog("Couldn't allocate memory", SEVERITY_ERROR, log_fd);
+            exit(EXIT_FAILURE);
+        }
     }
+    return addresses;
 }
 
-void allocCommandHandler(char **fields, int n) {
+void allocCommandHandler(char **fields, int n, void **addresses) {
     char *sizeField = fields[1];
-    int size;
-    if ((size = readSize(sizeField)) >= 0) {
-        //TODO handle id field
-        myalloc(size);
+    char *idField = fields[2];
+    int size, id;
+    if (((size = readPositiveInt(sizeField)) >= 0) && ((id = readPositiveInt(idField)) >= 0)) {
+        void *address = myalloc(size);
+        addresses[id] = address;
     }
 }
 
-void freeCommandHandler(char **fields, int n) {
-    //TODO
+void freeCommandHandler(char **fields, int n, void **addresses) {
+    char *idField = fields[1];
+    int id;
+    if ((id = readPositiveInt(idField)) >= 0) {
+        myfree(addresses[id]);
+    }
 }
-
 
 /**
  * @brief This utility function can be used to parse data separated by a using string delimiter.
@@ -111,7 +121,7 @@ CommandType detectCommand(char **fields, int n) {
     return command;
 }
 
-int readSize(char *sizeField) {
-    int size = atoi(sizeField);
-    return (size > 0) ? size : -1;
+int readPositiveInt(char *field) {
+    int n = atoi(field);
+    return (n > 0) ? n : -1;
 }
