@@ -1,4 +1,4 @@
-all : firstfit cli
+all : firstfit cli gui
 
 memory.o : memory.c memory.h
 	gcc -c memory.c
@@ -33,5 +33,8 @@ firstfit : memory.o testFirstFit.o
 cli : main.o memory.o cli.o batch.o types.o util.o command.o interactive.o
 	gcc main.o memory.o batch.o cli.o types.o util.o command.o interactive.o -o cli
 
+gui : memory.h
+	gcc -o gui gui.c -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
+
 clean :
-	rm -f firstfit cli *.o
+	rm -f firstfit cli gui *.o
