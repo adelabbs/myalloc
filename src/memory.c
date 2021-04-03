@@ -205,10 +205,10 @@ int nextFit(int blockSize) {
   return position;
 }
 
-int bestFit(int blockSize) {}
+int bestFit(int blockSize) {
   if (getMemoryAvailableSpace(memory) < blockSize) {
-     perror("Couldn't allocate block, not enough space");
-     exit(EXIT_FAILURE);
+    perror("Couldn't allocate block, not enough space");
+    exit(EXIT_FAILURE);
   }
   int temp, lowest = getMemoryAvailableSpace(memory);
   int position = 0;
@@ -230,10 +230,10 @@ int bestFit(int blockSize) {}
   return position;
 }
 
-int worstFit(int blockSize) {}
+int worstFit(int blockSize) {
   if (getMemoryAvailableSpace(memory) < blockSize) {
-     perror("Couldn't allocate block, not enough space");
-     exit(EXIT_FAILURE);
+    perror("Couldn't allocate block, not enough space");
+    exit(EXIT_FAILURE);
   }
   int temp, highest = getMemoryAvailableSpace(memory);
   int position = 0;
