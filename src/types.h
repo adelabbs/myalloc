@@ -20,10 +20,11 @@ typedef enum {
   COMMAND_INIT,
   COMMAND_ALLOC,
   COMMAND_FREE,
+  COMMAND_END,
   COMMAND_UKN 
 }  CommandType;
 
-#define COMMAND_CODES_COUNT 3
+#define COMMAND_CODES_COUNT 4
 extern const char *commandCodes[COMMAND_CODES_COUNT];
 
 /**

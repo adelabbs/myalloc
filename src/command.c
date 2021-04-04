@@ -68,6 +68,8 @@ void handleInput(InputHandler *inputHandler, char *buffer, int maxBufferSize) {
     case COMMAND_FREE:
         freeCommandHandler(inputHandler, fields, fieldsCount);
         break;
+    case COMMAND_END:
+        removeMemoryHandler(inputHandler);
     }
 }
 
@@ -166,6 +168,16 @@ void freeCommandHandler(InputHandler *inputHandler, char **fields, int n) {
     }
     else {
         writeLog("Invalid command format", SEVERITY_ERROR, log_fd);
+    }
+}
+
+void removeMemoryHandler(InputHandler *inputHandler) {
+    if(inputHandler->addresses != NULL) {
+        printf("yolo");
+        writeLog("Memory erased successfuly", SEVERITY_INFO, log_fd);
+        freeMemory();
+    } else {
+        writeLog("No memory", SEVERITY_ERROR, log_fd);
     }
 }
 
