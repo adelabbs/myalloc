@@ -23,6 +23,9 @@ int main(int argc, char *argv[]) {
 
     initLog(&log_fd, LOG_PATH_DEFAULT);
     writeLog("Launching", SEVERITY_DEBUG, log_fd);
+    if (argc == 1) {
+        display_options(argv[0]);
+    }
     while ((option = getopt(argc, argv, format)) != -1) {
         switch (option) {
         case 'h':
@@ -49,8 +52,8 @@ void display_options(char *usage) {
     printf("Usage:\n%s [-hi] or[-f filePath] or [-c] [s:size] ([a:blockSize:blockId] || [f:blockId])^n \n", usage);
     printf("   -h : display this help\n");
     printf("   -i : interactive mode\n");
-    printf("   -f : batch mode\n");
-    printf("   -c : command-line mode\n");
+    printf("   -f : batch mode (execute a command file)\n");
+    printf("   -c : command-line mode | format example: -c s:100 a:25:1 f:1 \n");
 }
 
 void interactiveModeHandler() {
