@@ -22,3 +22,16 @@
 [DEBUG] 2021-04-04 21:43:37 removeBlock() = 40
 [INFO] 2021-04-04 21:43:37 freeMemory()
 [INFO] 2021-04-04 21:43:37 End of demo
+[INFO] 2021-04-04 22:01:46 Launching
+[INFO] 2021-04-04 22:01:46 initMemory(100)
+[INFO] 2021-04-04 22:01:46 myalloc(15)
+[INFO] 2021-04-04 22:01:46 myalloc(20)
+[INFO] 2021-04-04 22:01:46 myalloc(15)
+[INFO] 2021-04-04 22:01:46 myalloc(40)
+[INFO] 2021-04-04 22:01:46 block4 = myfree(block4)
+[DEBUG] 2021-04-04 22:01:46 removeBlock() = 40
+[INFO] 2021-04-04 22:01:46 myalloc(40)
+[INFO] 2021-04-04 22:01:46 myfree(block5)
+[DEBUG] 2021-04-04 22:01:46 removeBlock() = 40
+[INFO] 2021-04-04 22:01:46 freeMemory()
+[INFO] 2021-04-04 22:01:46 End of demo

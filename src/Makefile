@@ -52,4 +52,4 @@ gui : gui.o batch.o command.o util.o  core.o default_strategies.o memory_interna
 	gcc -o gui gui.o batch.o command.o util.o  core.o default_strategies.o memory_internal.o types.o -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
 
 clean :
-	rm -f cli gui latex html *.o
+	rm -f demo test gui *.o

@@ -1,2 +1,8 @@
-
+*.o
+*.log
+test
+demo
+gui
+superconf.conf
+/docs/
 *.log

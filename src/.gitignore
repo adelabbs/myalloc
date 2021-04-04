@@ -1,7 +1,0 @@
-*.o
-*.log
-cli
-gui
-superconf.conf
-/html
-/latex
