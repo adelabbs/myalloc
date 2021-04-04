@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         case 'i':
             interactiveModeHandler();
             break;
-        case 'b':
+        case 'f':
             batchModeHandler();
             break;
         case 'c':
@@ -42,6 +42,7 @@ int main(int argc, char *argv[]) {
             return 1;
         }
     }
+    return 0;
 }
 
 void display_options(char *usage) {

@@ -1,4 +1,4 @@
 *.o
-myalloc
-firstfit
 cli
+gui
+superconf.conf
