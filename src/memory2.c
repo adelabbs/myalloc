@@ -6,7 +6,7 @@ struct Memory {
     int size;
     int availableSpace;
     void *address;
-    BlockListPr blockList;
+    BlockListPtr blockList;
 };
 
 struct BlockList {
@@ -23,24 +23,24 @@ int getMemorySize(MemoryPtr memory);
 int getMemoryAvailableSpace(MemoryPtr memory);
 void setMemoryAvailableSpace(MemoryPtr memory, int availableSpace);
 void *getMemoryAddress(MemoryPtr memory);
-BlockListPr getMemoryBlockList(MemoryPtr memory);
+BlockListPtr getMemoryBlockList(MemoryPtr memory);
 
 int firstFit(int blockSize, MemoryPtr memory);
 void *allocMemory(int nBytes, MemoryPtr memory);
 
-BlockListPr createBlockList(void);
-void addBlock(BlockListPr blockList, int size, int position);
-void removeBlock(BlockListPr blockList, int position);
-void destroyBlockList(BlockListPr blockList);
+BlockListPtr createBlockList(void);
+void addBlockHead(BlockListPtr blockList, int size, int position);
+void addBlockAfter(BlockListPtr blockList, int size, int position);
+void destroyBlockList(BlockListPtr blockList);
 
-int getBlockPosition(BlockListPr blockList);
-int getBlockPosition(BlockListPr blockList);
-int getBlockSize(BlockListPr blockList);
-BlockListPr getNextBlock(BlockListPr blockList);
+int getBlockPosition(BlockListPtr blockList);
+int getBlockPosition(BlockListPtr blockList);
+int getBlockSize(BlockListPtr blockList);
+BlockListPtr getNextBlock(BlockListPtr blockList);
 
-int isEmptyBlockList(BlockListPr blockList);
-int getSizeBetweenNextBLock(BlockListPr bl);
-void removeBlockHead(BlockListPr blockList, MemoryPtr memory);
+int isEmptyBlockList(BlockListPtr blockList);
+int getSizeBetweenNextBLock(BlockListPtr bl);
+void removeBlockHead(BlockListPtr blockList);
 
 
 int getMemorySize(MemoryPtr memory) {
@@ -61,7 +61,7 @@ void *getMemoryAddress(MemoryPtr memory) {
     return memory->address;
 }
 
-BlockListPr getMemoryBlockList(MemoryPtr memory) {
+BlockListPtr getMemoryBlockList(MemoryPtr memory) {
     return memory->blockList;
 }
 
@@ -76,13 +76,13 @@ MemoryPtr createMemory(int size) {
             exit(EXIT_FAILURE);
         }
         memory->address = address;
-        memory->blockList = createBlockList();
+        memory->blockList = NULL;
     }
     return memory;
 }
 
 void destroyMemory(MemoryPtr memory) {
-    BlockListPr blockList = getMemoryBlockList(memory);
+    BlockListPtr blockList = getMemoryBlockList(memory);
     destroyBlockList(blockList);
     free(memory);
 }
@@ -91,7 +91,8 @@ void displayMemory(MemoryPtr memory) {
     printf("TOTAL SPACE = %d\n", getMemorySize(memory));
     printf("AVAILABLE SPACE = %d\n", getMemoryAvailableSpace(memory));
     printf("Block\t|Position\t|Size\n");
-    BlockListPr bl = getMemoryBlockList(memory);
+    BlockListPtr bl = getMemoryBlockList(memory);
+    printf("bl memory = %p\n", bl);
     int i = 0;
     while (!isEmptyBlockList(bl)) {
         printf("%d\t| %d\t\t| %d\n", i, getBlockPosition(bl), getBlockSize(bl));
@@ -107,16 +108,32 @@ int firstFit(int blockSize, MemoryPtr memory) {
         exit(EXIT_FAILURE);
     }
     int position = 0;
-    //To set global memory attributes, use the adress and &.
-    BlockListPr bl = getMemoryBlockList(memory);
-    if (!isEmptyBlockList(bl)) {
-        while (getNextBlock(bl) != NULL && getSizeBetweenNextBLock(bl) < blockSize) {
-            bl = getNextBlock(bl);
-            position++;
+    BlockListPtr bl = getMemoryBlockList(memory);
+    if (isEmptyBlockList(bl)) {
+        BlockListPtr block = (BlockListPtr)malloc(sizeof(*block));
+        if (block == NULL) {
+            perror("Couldn't allocate memory in function createBlockList()");
+            exit(EXIT_FAILURE);
         }
-        //TODO handle no space found
+        block->position = position;
+        block->size = blockSize;
+        block->next = NULL;
+        memory->blockList = block;
     }
-    addBlock(bl, position, blockSize);
+    else {
+        int stop = 0;
+        position += getBlockSize(bl);
+        while (getNextBlock(bl) != NULL && !stop) {
+            if (getSizeBetweenNextBLock(bl) >= blockSize) {
+                stop = 1;
+            }
+            else {
+                bl = getNextBlock(bl);
+                position += getBlockSize(bl);
+            }
+        }
+        addBlockAfter(bl, blockSize, position);
+    }
     setMemoryAvailableSpace(memory, getMemoryAvailableSpace(memory) - blockSize);
     return position;
 }
@@ -130,20 +147,20 @@ void *allocMemory(int nBytes, MemoryPtr memory) {
 /********** BlockList ********/
 
 
-int getBlockPosition(BlockListPr blockList) {
+int getBlockPosition(BlockListPtr blockList) {
     return blockList->position;
 }
 
-int getBlockSize(BlockListPr blockList) {
+int getBlockSize(BlockListPtr blockList) {
     return blockList->size;
 }
 
-BlockListPr getNextBlock(BlockListPr blockList) {
+BlockListPtr getNextBlock(BlockListPtr blockList) {
     return blockList->next;
 }
 
-BlockListPr createBlockList(void) {
-    BlockListPr blocklist = (BlockListPr)malloc(sizeof(*blocklist));
+BlockListPtr createBlockList(void) {
+    BlockListPtr blocklist = (BlockListPtr)malloc(sizeof(*blocklist));
     if (blocklist == NULL) {
         perror("Couldn't allocate memory in function createBlockList()");
         exit(EXIT_FAILURE);
@@ -151,18 +168,24 @@ BlockListPr createBlockList(void) {
     return blocklist;
 }
 
-int isEmptyBlockList(BlockListPr blockList) {
+int isEmptyBlockList(BlockListPtr blockList) {
     return blockList == NULL;
 }
 
-int getSizeBetweenNextBLock(BlockListPr bl) {
+int getSizeBetweenNextBLock(BlockListPtr bl) {
     return getBlockPosition(getNextBlock(bl)) - (getBlockPosition(bl) + getBlockSize(bl));
 }
 
-void addBlock(BlockListPr blockList, int size, int position) {
-    BlockListPr block = createBlockList();
+void displayBlockList(BlockListPtr blockList) {
+    while (!isEmptyBlockList(blockList)) {
+        printf("%d\t\t| %d\n", getBlockPosition(blockList), getBlockSize(blockList));
+    }
+}
+
+void addBlockHead(BlockListPtr blockList, int size, int position) {
+    BlockListPtr block = createBlockList();
     if (block == NULL) {
-        perror("Couldn't allocate memory in function addBlock()");
+        perror("Couldn't allocate memory in function addBlockHead()");
         exit(EXIT_FAILURE);
     }
     block->position = position;
@@ -171,19 +194,60 @@ void addBlock(BlockListPr blockList, int size, int position) {
     blockList = block;
 }
 
-void removeBlock(BlockListPr blockList, int position) {
-
+void addBlockAfter(BlockListPtr blockList, int size, int position) {
+    BlockListPtr block = createBlockList();
+    if (block == NULL) {
+        perror("Couldn't allocate memory in function addBlockAfter()");
+        exit(EXIT_FAILURE);
+    }
+    block->position = position;
+    block->size = size;
+    block->next = getNextBlock(blockList);
+    blockList->next = block;
 }
 
-void removeBlockHead(BlockListPr blockList, MemoryPtr memory) {
-    BlockListPr tmp;
+BlockListPtr searchBlock(BlockListPtr blockList, int position) {
+    if (isEmptyBlockList(blockList) || position == 0) {
+        return blockList;
+    }
+    else if (getBlockPosition(blockList) == position) {
+        return blockList;
+    }
+    else {
+        searchBlock(getNextBlock(blockList), position);
+    }
+}
+
+void removeBlock(BlockListPtr blockList, int position, MemoryPtr memory) {
+    BlockListPtr block;
+    if ((block = searchBlock(blockList, position)) != NULL) {
+        removeBlockHead(block);
+    }
+}
+
+void removeBlockHead(BlockListPtr blockList) {
+    BlockListPtr tmp;
     tmp = blockList;
-    int size = getBlockSize(blockList);
     blockList = getNextBlock(blockList);
     free(tmp);
-    setMemoryAvailableSpace(memory, getMemoryAvailableSpace(memory) + size);
 }
 
-void destroyBlockList(BlockListPr blockList) {
+void destroyBlockList(BlockListPtr blockList) {
+    while (!isEmptyBlockList(blockList)) {
+        removeBlockHead(blockList);
+    }
+}
 
+int freeMemory(void *p, MemoryPtr m) {
+  /* Check if the pointer is valid*/
+  if (p == NULL) {
+    perror("Couldn't find the block in function myfree()");
+    exit(EXIT_FAILURE);
+  }
+  BlockListPtr bl = getMemoryBlockList(m);
+  int position = p - getMemoryAddress(m);
+  /* Partial search of the block in the blockList*/
+  removeBlock(bl, position, m);
+  displayMemory(m);
+  return 0;
 }

@@ -5,12 +5,7 @@
  * @brief A pointer to the incomplete BlockList type (hides the implementation details, to make future extensions easier).
  *
  */
-typedef struct BlockList *BlockListPr;
-
-BlockListPr createBlockList(void);
-void destroyBlockList(BlockListPr blockList);
-void addBlock(BlockListPr blockList, int size, int position);
-void removeBlock(BlockListPr blockList, int position);
+typedef struct BlockList *BlockListPtr;
 
 /**
  * @brief A pointer to the incomplete Memory type (hides the implementation details)
@@ -18,11 +13,17 @@ void removeBlock(BlockListPr blockList, int position);
  */
 typedef struct Memory *MemoryPtr;
 
+BlockListPtr createBlockList(void);
+void destroyBlockList(BlockListPtr blockList);
+void addBlock(BlockListPtr blockList, int size, int position);
+void removeBlock(BlockListPtr blockList, int position, MemoryPtr memory);
+
+
 MemoryPtr createMemory(int size);
 void destroyMemory(MemoryPtr memory);
 void displayMemory(MemoryPtr memory);
 void *allocMemory(int nBytes, MemoryPtr memory);
-
+int freeMemory(void *p, MemoryPtr m);
 /**
  * @brief initialization of the work area
  *
