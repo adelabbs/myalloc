@@ -21,9 +21,6 @@ cli.o : cli.c cli.h command.h
 interactive.o : interactive.c interactive.h
 	gcc -c interactive.c
 
-memory.o : memory.c memory.h
-	gcc -c memory.c
-
 memory_internal.o : memory_internal.c memory_internal.h memory_interface.h util.h
 	gcc -c memory_internal.c
 
