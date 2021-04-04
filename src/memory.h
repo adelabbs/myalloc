@@ -12,10 +12,6 @@ typedef struct {
     int availableSpace;
     void *generalBlock;
     BlockList blocks;
-    /*
-    pthread_mutex_t lock;
-    pthread_cond_t cond;
-    */
 } MemorySpace;
 
 extern MemorySpace memory;
