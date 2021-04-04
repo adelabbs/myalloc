@@ -30,17 +30,31 @@ void *firstFit(MemoryPtr memory, int nBytes) {
         }
         else {
             int stop = 0;
-            position += getBlockSize(bl);
-            while (getNextBlock(bl) != NULL && !stop) {
-                if (getSizeBetweenNextBLock(bl) >= nBytes) {
-                    stop = 1;
+            //If enough space before first block, insertHead
+            if (getBlockPosition(bl) >= nBytes) {
+                BlockListPtr block = createBlockList();
+                if (block == NULL) {
+                    perror("Couldn't allocate memory in function addBlockAfter()");
+                    exit(EXIT_FAILURE);
                 }
-                else {
-                    bl = getNextBlock(bl);
-                    position += getBlockSize(bl);
-                }
+                block->position = position;
+                block->size = nBytes;
+                block->next = getMemoryBlockList(memory);
+                memory->blockList = block;
             }
-            addBlock(bl, nBytes, position);
+            else { //Look for space
+                position += getBlockPosition(bl) + getBlockSize(bl);
+                while (getNextBlock(bl) != NULL && !stop) {
+                    if (getSizeBetweenNextBLock(bl) >= nBytes) {
+                        stop = 1;
+                    }
+                    else {
+                        bl = getNextBlock(bl);
+                        position += getBlockSize(bl);
+                    }
+                }
+                addBlock(bl, nBytes, position);
+            }
         }
         setMemoryAvailableSpace(memory, getMemoryAvailableSpace(memory) - nBytes);
         displayMemory(memory);

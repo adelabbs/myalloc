@@ -44,7 +44,6 @@ int getBlockPosition(BlockListPtr blockList);
 int getBlockSize(BlockListPtr blockList);
 BlockListPtr getNextBlock(BlockListPtr blockList);
 int getSizeBetweenNextBLock(BlockListPtr bl);
-
 int isEmptyBlockList(BlockListPtr blockList);
 void removeBlockHead(BlockListPtr *blockList);
 
