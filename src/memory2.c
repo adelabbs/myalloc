@@ -40,7 +40,7 @@ BlockListPtr getNextBlock(BlockListPtr blockList);
 
 int isEmptyBlockList(BlockListPtr blockList);
 int getSizeBetweenNextBLock(BlockListPtr bl);
-void removeBlockHead(BlockListPtr blockList);
+void removeBlockHead(BlockListPtr *blockList);
 
 
 int getMemorySize(MemoryPtr memory) {
@@ -92,7 +92,6 @@ void displayMemory(MemoryPtr memory) {
     printf("AVAILABLE SPACE = %d\n", getMemoryAvailableSpace(memory));
     printf("Block\t|Position\t|Size\n");
     BlockListPtr bl = getMemoryBlockList(memory);
-    printf("bl memory = %p\n", bl);
     int i = 0;
     while (!isEmptyBlockList(bl)) {
         printf("%d\t| %d\t\t| %d\n", i, getBlockPosition(bl), getBlockSize(bl));
@@ -179,6 +178,7 @@ int getSizeBetweenNextBLock(BlockListPtr bl) {
 void displayBlockList(BlockListPtr blockList) {
     while (!isEmptyBlockList(blockList)) {
         printf("%d\t\t| %d\n", getBlockPosition(blockList), getBlockSize(blockList));
+        blockList = getNextBlock(blockList);
     }
 }
 
@@ -206,48 +206,50 @@ void addBlockAfter(BlockListPtr blockList, int size, int position) {
     blockList->next = block;
 }
 
-BlockListPtr searchBlock(BlockListPtr blockList, int position) {
-    if (isEmptyBlockList(blockList) || position == 0) {
+BlockListPtr *searchBlock(BlockListPtr *blockList, int position) {
+    if (isEmptyBlockList(*blockList)) {
         return blockList;
     }
-    else if (getBlockPosition(blockList) == position) {
+    else if (getBlockPosition(*blockList) == position) {
         return blockList;
     }
     else {
-        searchBlock(getNextBlock(blockList), position);
+        searchBlock(&(*blockList)->next, position);
     }
 }
 
 void removeBlock(BlockListPtr blockList, int position, MemoryPtr memory) {
-    BlockListPtr block;
-    if ((block = searchBlock(blockList, position)) != NULL) {
-        removeBlockHead(block);
+    BlockListPtr *block;
+    if ((block = searchBlock(&blockList, position)) != NULL) {
+        int blockSize = getBlockSize(*block);
+        removeBlockHead(block); 
+        setMemoryAvailableSpace(memory, getMemoryAvailableSpace(memory) + blockSize);
     }
 }
 
-void removeBlockHead(BlockListPtr blockList) {
+void removeBlockHead(BlockListPtr *blockList) {
     BlockListPtr tmp;
-    tmp = blockList;
-    blockList = getNextBlock(blockList);
+    tmp = *blockList;
+    *blockList = getNextBlock(*blockList);
     free(tmp);
 }
 
 void destroyBlockList(BlockListPtr blockList) {
     while (!isEmptyBlockList(blockList)) {
-        removeBlockHead(blockList);
+        removeBlockHead(&blockList);
     }
 }
 
 int freeMemory(void *p, MemoryPtr m) {
-  /* Check if the pointer is valid*/
-  if (p == NULL) {
-    perror("Couldn't find the block in function myfree()");
-    exit(EXIT_FAILURE);
-  }
-  BlockListPtr bl = getMemoryBlockList(m);
-  int position = p - getMemoryAddress(m);
-  /* Partial search of the block in the blockList*/
-  removeBlock(bl, position, m);
-  displayMemory(m);
-  return 0;
+    /* Check if the pointer is valid*/
+    if (p == NULL) {
+        perror("Invalid address");
+        exit(EXIT_FAILURE);
+    }
+    BlockListPtr bl = getMemoryBlockList(m);
+    int position = p - getMemoryAddress(m);
+    /* Partial search of the block in the blockList*/
+    removeBlock(bl, position, m);
+    displayMemory(m);
+    return 0;
 }
