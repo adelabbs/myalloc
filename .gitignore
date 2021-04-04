@@ -6,3 +6,5 @@ gui
 superconf.conf
 /docs/
 *.log
+*.log
+src/superconf.conf

@@ -51,3 +51,25 @@
 [DEBUG] 2021-04-04 22:29:00 Read 'f:1'
 [DEBUG] 2021-04-04 22:29:00 removeBlock() = 1
 [DEBUG] 2021-04-04 22:29:00 Read 'a:1:3'
+[DEBUG] 2021-04-04 22:32:13 Launching
+[INFO] 2021-04-04 22:32:13 Running batch mode
+[DEBUG] 2021-04-04 22:32:13 Interpreted file as superconf.conf
+[DEBUG] 2021-04-04 22:32:13 Read 's:100
+'
+[DEBUG] 2021-04-04 22:32:13 Read 'a:1:1
+'
+[DEBUG] 2021-04-04 22:32:13 Read 'a:50:2
+'
+[DEBUG] 2021-04-04 22:32:13 Read 'a:25:3
+'
+[DEBUG] 2021-04-04 22:32:13 Read 'a:15:4
+'
+[DEBUG] 2021-04-04 22:32:13 Read 'a:1:5
+'
+[DEBUG] 2021-04-04 22:32:13 Read 'f:3
+'
+[DEBUG] 2021-04-04 22:32:13 removeBlock() = 25
+[DEBUG] 2021-04-04 22:32:13 Read 'f:1
+'
+[DEBUG] 2021-04-04 22:32:13 removeBlock() = 1
+[DEBUG] 2021-04-04 22:32:13 Read 'a:1:6'

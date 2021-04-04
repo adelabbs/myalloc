@@ -132,7 +132,6 @@ int check(InputHandler *inputHandler) {
 void allocCommandHandler(InputHandler *inputHandler, char **fields, int n) {
     if (n == 3) {
         if (check(inputHandler)) {
-            printf("inputHandler = %p\n", inputHandler);
             char *sizeField = fields[1];
             char *idField = fields[2];
             int size, id;
