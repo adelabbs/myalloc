@@ -6,13 +6,21 @@
 #define FIELDS_COUNT 3
 #define SEPARATOR ":"
 
-void inputHandler(char *buffer, int maxBufferSize);
+typedef struct {
+    void **addresses;
+}InputHandler;
 
-void freeCommandHandler(char **fields, int n, void **addresses);
-void allocCommandHandler(char **fields, int n, void **addresses);
-void **initCommandHandler(char **fields, int n);
+void initInputHandler(InputHandler *inputHandler);
+void createInputHandler(InputHandler *inputHandler, int addressesCount);
+void destroyInputHandler(InputHandler *inputHandler);
+
+void handleInput(InputHandler *inputHandler, char *buffer, int maxBufferSize);
+
+void freeCommandHandler(InputHandler *inputHandler, char **fields, int n);
+void allocCommandHandler(InputHandler *inputHandler, char **fields, int n);
+void initCommandHandler(InputHandler *inputHandler, char **fields, int n);
 
 CommandType detectCommand(char **fields, int n);
-char **parseData(char *data, int count, char *separator) ;
+char **parseData(char *data, int count, char *separator, int *fieldsCount);
 
 #endif /*_COMMAND_H_*/
