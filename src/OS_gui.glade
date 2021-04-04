@@ -5,8 +5,6 @@
   <object class="GtkWindow" id="window_main">
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">Memory Manager</property>
-    <property name="default-width">440</property>
-    <property name="default-height">250</property>
     <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
     <child>
       <!-- n-columns=3 n-rows=3 -->
@@ -36,38 +34,11 @@
             <property name="baseline-position">top</property>
             <property name="layout-style">start</property>
             <child>
-              <object class="GtkButton" id="add">
-                <property name="label" translatable="yes">Add Block</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <signal name="clicked" handler="on_add_clicked" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="remove">
-                <property name="label" translatable="yes">Remove Block
-</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkFileChooserButton" id="file_choser">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="title" translatable="yes">Browse to file</property>
+                <signal name="file-set" handler="on_file_choser_file_set" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -82,6 +53,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
+                <signal name="clicked" handler="on_read_button_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -109,15 +81,17 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkLabel" id="graph_legend">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="valign">end</property>
-            <property name="label" translatable="yes">Memory Representation :</property>
+            <property name="label" translatable="yes">Graph Legend :</property>
+            <property name="justify">center</property>
+            <property name="xalign">0.89999997615814209</property>
+            <property name="yalign">0.20999999344348907</property>
           </object>
           <packing>
             <property name="left-attach">0</property>
-            <property name="top-attach">0</property>
+            <property name="top-attach">2</property>
           </packing>
         </child>
         <child>
@@ -131,26 +105,46 @@
             <signal name="draw" handler="on_memory_draw" swapped="no"/>
           </object>
           <packing>
-            <property name="left-attach">0</property>
+            <property name="left-attach">1</property>
             <property name="top-attach">1</property>
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="graph_legend">
+          <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">Graph Legend :</property>
+            <property name="label" translatable="yes">White : Innocupied
+Red: Occupied
+</property>
           </object>
           <packing>
-            <property name="left-attach">0</property>
+            <property name="left-attach">1</property>
             <property name="top-attach">2</property>
           </packing>
         </child>
         <child>
-          <placeholder/>
+          <object class="GtkImage" id="logo_cy">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="pixbuf">cylogo.png</property>
+          </object>
+          <packing>
+            <property name="left-attach">2</property>
+            <property name="top-attach">0</property>
+          </packing>
         </child>
         <child>
-          <placeholder/>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Memory Display :
+</property>
+            <property name="xalign">0.949999988079071</property>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">1</property>
+          </packing>
         </child>
         <child>
           <placeholder/>
