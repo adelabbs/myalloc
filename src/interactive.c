@@ -14,6 +14,8 @@ void interactiveMode() {
     printf("--------------------------\n");
     printf("TO DELETE A BLOCK, PLEASE TYPE: 'a:i', WITH I THE POSITION OF YOUR BLOCK");
     printf("--------------------------\n");
+    printf("TO FREE THE MEMORY SPACE, PLEASE TYPE: 'r'");
+    printf("--------------------------\n");
     printf("TO QUIT, PLEASE TYPE: 'quit'");
     printf("--------------------------\n");
     char input[INPUT_SIZE];
