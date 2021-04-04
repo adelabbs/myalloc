@@ -1,4 +1,4 @@
-all : cli gui doc
+all : demo test gui doc
 
 doc :
 	doxygen doxygen.conf
@@ -33,14 +33,20 @@ default_strategies.o : default_strategies.c default_strategies.h memory_internal
 core.o : core.c core.h default_strategies.h memory_internal.h util.h
 	gcc -c  core.c
 
-main.o : main.c cli.h batch.h interactive.h util.h
-	gcc -c main.c
+demo.o : demo.c util.h
+	gcc -c demo.c
+
+test.o : test.c cli.h batch.h interactive.h util.h
+	gcc -c test.c
 
 gui.o : memory_internal.h batch.h command.h util.h types.h
 	gcc -c gui.c `pkg-config --cflags --libs gtk+-3.0`
 
-cli : main.o core.o default_strategies.o memory_internal.o cli.o batch.o types.o util.o command.o interactive.o 
-	gcc main.o core.o default_strategies.o memory_internal.o batch.o cli.o types.o util.o command.o interactive.o -o cli
+demo : demo.o core.o default_strategies.o memory_internal.o types.o util.o
+	gcc demo.o core.o default_strategies.o memory_internal.o types.o util.o -o demo
+
+test : test.o core.o default_strategies.o memory_internal.o cli.o batch.o types.o util.o command.o interactive.o 
+	gcc test.o core.o default_strategies.o memory_internal.o batch.o cli.o types.o util.o command.o interactive.o -o test
 
 gui : gui.o batch.o command.o util.o  core.o default_strategies.o memory_internal.o types.o
 	gcc -o gui gui.o batch.o command.o util.o  core.o default_strategies.o memory_internal.o types.o -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic

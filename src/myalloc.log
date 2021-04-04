@@ -1,220 +1,24 @@
-[DEBUG] 2021-04-04 17:22:17 Launching
-[INFO] 2021-04-04 17:22:17 Running interactive mode
-[DEBUG] 2021-04-04 17:22:25 Launching
-[DEBUG] 2021-04-04 17:22:31 Launching
-[DEBUG] 2021-04-04 17:23:24 Launching
-[INFO] 2021-04-04 17:23:24 Running batch mode
-[DEBUG] 2021-04-04 17:23:24 Interpreted file as superconf.conf
-[DEBUG] 2021-04-04 17:23:24 Read 's:100
-'
-[DEBUG] 2021-04-04 17:23:24 Read 'a:1:1
-'
-[DEBUG] 2021-04-04 17:23:24 Read 'a:1:2'
-[DEBUG] 2021-04-04 17:23:46 Launching
-[INFO] 2021-04-04 17:23:46 Running cli mode
-[DEBUG] 2021-04-04 17:23:46 Read 's:1000'
-[DEBUG] 2021-04-04 17:23:46 Read 'a:15:1'
-[DEBUG] 2021-04-04 18:31:26 Launching
-[DEBUG] 2021-04-04 18:37:52 Launching
-[INFO] 2021-04-04 18:37:52 Running cli mode
-[DEBUG] 2021-04-04 18:37:52 Read 's:100'
-[DEBUG] 2021-04-04 18:38:01 Launching
-[INFO] 2021-04-04 18:38:01 Running cli mode
-[DEBUG] 2021-04-04 18:38:01 Read 'a:15:1'
-[ERROR] 2021-04-04 18:38:01 Memory not initialized
-[DEBUG] 2021-04-04 18:39:07 Launching
-[INFO] 2021-04-04 18:39:07 Running cli mode
-[DEBUG] 2021-04-04 18:39:07 Read 'a:15:1'
-[ERROR] 2021-04-04 18:39:07 Memory not initialized
-[DEBUG] 2021-04-04 18:40:26 Launching
-[INFO] 2021-04-04 18:40:26 Running cli mode
-[DEBUG] 2021-04-04 18:40:26 Read 'a:15:1'
-[ERROR] 2021-04-04 18:40:26 Memory not initialized
-[DEBUG] 2021-04-04 18:48:16 Launching
-[INFO] 2021-04-04 18:48:16 Running cli mode
-[DEBUG] 2021-04-04 18:48:16 Read 's:10'
-[DEBUG] 2021-04-04 18:48:16 Read 'a:15:1'
-[ERROR] 2021-04-04 18:48:16 Couldn't allocate block, not enough space
-[ERROR] 2021-04-04 18:48:16 Didn't allocate block
-[DEBUG] 2021-04-04 18:49:10 Launching
-[INFO] 2021-04-04 18:49:10 Running cli mode
-[DEBUG] 2021-04-04 18:49:10 Read 's:10'
-[DEBUG] 2021-04-04 18:49:10 Read 'a:8:1'
-[DEBUG] 2021-04-04 18:49:10 Read 'f:1'
-[DEBUG] 2021-04-04 18:49:10 Read 'a:4:1'
-[DEBUG] 2021-04-04 18:50:26 Launching
-[INFO] 2021-04-04 18:50:26 Running cli mode
-[DEBUG] 2021-04-04 18:50:26 Read 's:10'
-[DEBUG] 2021-04-04 18:50:26 Read 'a:8:1'
-[DEBUG] 2021-04-04 18:50:26 Read 'f:1'
-[DEBUG] 2021-04-04 18:53:12 Launching
-[INFO] 2021-04-04 18:53:12 Running cli mode
-[DEBUG] 2021-04-04 18:53:12 Read 's:10'
-[DEBUG] 2021-04-04 18:53:12 Read 'a:8:1'
-[DEBUG] 2021-04-04 18:53:12 Read 'f:1'
-[DEBUG] 2021-04-04 18:55:21 Launching
-[INFO] 2021-04-04 18:55:21 Running cli mode
-[DEBUG] 2021-04-04 18:55:21 Read 's:10'
-[DEBUG] 2021-04-04 18:55:21 Read 'a:8:1'
-[DEBUG] 2021-04-04 18:55:21 Read 'f:1'
-[DEBUG] 2021-04-04 18:55:21 removeBlock() = 8
-[DEBUG] 2021-04-04 18:58:44 Launching
-[INFO] 2021-04-04 18:58:44 Running cli mode
-[DEBUG] 2021-04-04 18:58:44 Read 's:10'
-[DEBUG] 2021-04-04 18:58:44 Read 'a:8:1'
-[DEBUG] 2021-04-04 18:58:44 Read 'f:1'
-[DEBUG] 2021-04-04 19:00:01 Launching
-[INFO] 2021-04-04 19:00:01 Running cli mode
-[DEBUG] 2021-04-04 19:00:01 Read 's:10'
-[DEBUG] 2021-04-04 19:00:01 Read 'a:8:1'
-[DEBUG] 2021-04-04 19:00:01 Read 'f:1'
-[DEBUG] 2021-04-04 19:00:16 Launching
-[INFO] 2021-04-04 19:00:16 Running cli mode
-[DEBUG] 2021-04-04 19:00:16 Read 's:10'
-[DEBUG] 2021-04-04 19:00:16 Read 'a:8:1'
-[DEBUG] 2021-04-04 19:00:16 Read 'f:1'
-[DEBUG] 2021-04-04 19:01:30 Launching
-[INFO] 2021-04-04 19:01:30 Running cli mode
-[DEBUG] 2021-04-04 19:01:30 Read 's:10'
-[DEBUG] 2021-04-04 19:01:30 Read 'a:8:1'
-[DEBUG] 2021-04-04 19:01:30 Read 'f:1'
-[DEBUG] 2021-04-04 19:09:37 Launching
-[INFO] 2021-04-04 19:09:37 Running cli mode
-[DEBUG] 2021-04-04 19:09:37 Read 's:10'
-[DEBUG] 2021-04-04 19:09:37 Read 'a:8:1'
-[DEBUG] 2021-04-04 19:09:37 Read 'f:1'
-[DEBUG] 2021-04-04 19:12:04 Launching
-[INFO] 2021-04-04 19:12:04 Running cli mode
-[DEBUG] 2021-04-04 19:12:04 Read 's:10'
-[DEBUG] 2021-04-04 19:12:04 Read 'a:8:1'
-[DEBUG] 2021-04-04 19:12:04 Read 'f:1'
-[DEBUG] 2021-04-04 19:12:04 removeBlock() = 8
-[DEBUG] 2021-04-04 19:12:54 Launching
-[INFO] 2021-04-04 19:12:54 Running cli mode
-[DEBUG] 2021-04-04 19:12:54 Read 's:10'
-[DEBUG] 2021-04-04 19:12:54 Read 'a:8:1'
-[DEBUG] 2021-04-04 19:12:54 Read 'f:1'
-[DEBUG] 2021-04-04 19:12:54 removeBlock() = 8
-[DEBUG] 2021-04-04 19:13:50 Launching
-[INFO] 2021-04-04 19:13:50 Running cli mode
-[DEBUG] 2021-04-04 19:13:50 Read 's:10'
-[DEBUG] 2021-04-04 19:13:50 Read 'a:8:1'
-[DEBUG] 2021-04-04 19:13:50 Read 'f:1'
-[DEBUG] 2021-04-04 19:13:50 removeBlock() = 8
-[DEBUG] 2021-04-04 19:14:58 Launching
-[INFO] 2021-04-04 19:14:58 Running cli mode
-[DEBUG] 2021-04-04 19:14:58 Read 's:10'
-[DEBUG] 2021-04-04 19:14:58 Read 'a:8:1'
-[DEBUG] 2021-04-04 19:14:58 Read 'f:1'
-[DEBUG] 2021-04-04 19:14:58 removeBlock() = 8
-[DEBUG] 2021-04-04 19:15:06 Launching
-[INFO] 2021-04-04 19:15:06 Running cli mode
-[DEBUG] 2021-04-04 19:15:06 Read 's:10'
-[DEBUG] 2021-04-04 19:15:06 Read 'a:8:1'
-[DEBUG] 2021-04-04 19:15:06 Read 'f:1'
-[DEBUG] 2021-04-04 19:15:06 removeBlock() = 8
-[DEBUG] 2021-04-04 19:15:06 Read 'a:3:2'
-[DEBUG] 2021-04-04 19:16:15 Launching
-[INFO] 2021-04-04 19:16:15 Running cli mode
-[DEBUG] 2021-04-04 19:16:15 Read 's:10'
-[DEBUG] 2021-04-04 19:16:15 Read 'a:8:1'
-[DEBUG] 2021-04-04 19:16:15 Read 'f:1'
-[DEBUG] 2021-04-04 19:16:15 removeBlock() = 8
-[DEBUG] 2021-04-04 19:16:15 Read 'a:3:2'
-[DEBUG] 2021-04-04 19:16:21 Launching
-[INFO] 2021-04-04 19:16:21 Running cli mode
-[DEBUG] 2021-04-04 19:16:21 Read 's:10'
-[DEBUG] 2021-04-04 19:16:21 Read 'a:8:1'
-[DEBUG] 2021-04-04 19:16:21 Read 'f:1'
-[DEBUG] 2021-04-04 19:16:21 removeBlock() = 8
-[DEBUG] 2021-04-04 19:16:21 Read 'a:3:2'
-[DEBUG] 2021-04-04 19:16:21 Read 'a:4:3'
-[DEBUG] 2021-04-04 19:22:00 Launching
-[INFO] 2021-04-04 19:22:00 Running interactive mode
-[DEBUG] 2021-04-04 19:22:03 Read 's:100'
-[DEBUG] 2021-04-04 19:30:49 Launching
-[INFO] 2021-04-04 19:30:49 Running interactive mode
-[DEBUG] 2021-04-04 19:30:53 Read 's:10'
-[DEBUG] 2021-04-04 19:30:58 Read 'a:5'
-[ERROR] 2021-04-04 19:30:58 Invalid command format
-[DEBUG] 2021-04-04 19:31:01 Read 'r'
-[INFO] 2021-04-04 19:31:01 Memory erased successfuly
-[DEBUG] 2021-04-04 19:31:01 Freed memory
-[DEBUG] 2021-04-04 19:39:32 Launching
-[INFO] 2021-04-04 19:39:32 Running interactive mode
-[DEBUG] 2021-04-04 19:39:35 Read 's:10'
-[DEBUG] 2021-04-04 19:39:42 Read 'a:5'
-[ERROR] 2021-04-04 19:39:42 Invalid command format
-[DEBUG] 2021-04-04 19:39:46 Read 'a:5'
-[ERROR] 2021-04-04 19:39:46 Invalid command format
-[DEBUG] 2021-04-04 19:39:52 Read 'a:5:1'
-[DEBUG] 2021-04-04 19:39:55 Read 'r'
-[INFO] 2021-04-04 19:39:55 Memory erased successfuly : 1 bytes freed
-[DEBUG] 2021-04-04 19:40:39 Read 'a:5:1'
-[DEBUG] 2021-04-04 19:40:52 Launching
-[INFO] 2021-04-04 19:40:52 Running interactive mode
-[DEBUG] 2021-04-04 19:40:55 Read 's:10'
-[DEBUG] 2021-04-04 19:40:57 Read 'a:5:1'
-[DEBUG] 2021-04-04 19:40:58 Read 'r'
-[INFO] 2021-04-04 19:40:58 Memory erased successfuly : 1 bytes freed
-[DEBUG] 2021-04-04 19:40:59 Read 's:10'
-[DEBUG] 2021-04-04 19:41:02 Read 'r'
-[INFO] 2021-04-04 19:41:02 Memory erased successfuly : 1 bytes freed
-[DEBUG] 2021-04-04 19:41:05 Read 'a:5'
-[ERROR] 2021-04-04 19:41:05 Invalid command format
-[DEBUG] 2021-04-04 19:41:09 Read 'a:5:1'
-[DEBUG] 2021-04-04 19:41:49 Launching
-[INFO] 2021-04-04 19:41:49 Running interactive mode
-[DEBUG] 2021-04-04 19:41:53 Read 's:10'
-[DEBUG] 2021-04-04 19:41:56 Read 'a:10:1'
-[DEBUG] 2021-04-04 19:41:57 Read 'r'
-[INFO] 2021-04-04 19:41:57 Memory erased successfuly : 1 bytes freed
-[DEBUG] 2021-04-04 19:42:55 Launching
-[INFO] 2021-04-04 19:42:55 Running interactive mode
-[DEBUG] 2021-04-04 19:42:58 Read 's:10'
-[DEBUG] 2021-04-04 19:42:59 Read 'r'
-[INFO] 2021-04-04 19:42:59 Memory erased successfuly : 10 bytes freed
-[DEBUG] 2021-04-04 19:44:48 Launching
-[INFO] 2021-04-04 19:44:48 Running interactive mode
-[DEBUG] 2021-04-04 19:44:50 Read 'r'
-[ERROR] 2021-04-04 19:44:50 No memory
-[DEBUG] 2021-04-04 19:44:58 Read 's:10'
-[DEBUG] 2021-04-04 19:44:59 Read 'r'
-[INFO] 2021-04-04 19:44:59 Memory erased successfuly : 10 bytes freed
-[DEBUG] 2021-04-04 19:45:02 Read 'a:10'
-[ERROR] 2021-04-04 19:45:02 Invalid command format
-[DEBUG] 2021-04-04 19:45:05 Read 'a:10:1'
-[DEBUG] 2021-04-04 19:46:56 Launching
-[INFO] 2021-04-04 19:46:56 Running interactive mode
-[DEBUG] 2021-04-04 19:46:58 Read 's:10'
-[DEBUG] 2021-04-04 19:47:00 Read 'a:5:1'
-[DEBUG] 2021-04-04 19:47:00 Read 'r'
-[INFO] 2021-04-04 19:47:00 Memory erased successfuly : 10 bytes freed
-[DEBUG] 2021-04-04 19:47:02 Read 'a:5:1'
-[DEBUG] 2021-04-04 19:47:57 Launching
-[INFO] 2021-04-04 19:47:57 Running interactive mode
-[DEBUG] 2021-04-04 19:47:58 Read 'r'
-[ERROR] 2021-04-04 19:47:58 No memory
-[DEBUG] 2021-04-04 19:48:02 Read 's:100'
-[DEBUG] 2021-04-04 19:48:04 Read 'r'
-[INFO] 2021-04-04 19:48:04 Memory erased successfuly : 100 bytes freed
-[DEBUG] 2021-04-04 19:48:06 Read 'a:10:1'
-[DEBUG] 2021-04-04 19:49:34 Launching
-[INFO] 2021-04-04 19:49:34 Running interactive mode
-[DEBUG] 2021-04-04 19:49:37 Read 's:10'
-[DEBUG] 2021-04-04 19:49:39 Read 'r'
-[DEBUG] 2021-04-04 19:52:13 Launching
-[INFO] 2021-04-04 19:52:13 Running interactive mode
-[DEBUG] 2021-04-04 19:52:18 Read 's:10'
-[DEBUG] 2021-04-04 19:52:22 Read 'a:1:2'
-[DEBUG] 2021-04-04 19:52:23 Read 'r'
-[INFO] 2021-04-04 19:52:23 Memory erased successfuly : 10 bytes freed
-[DEBUG] 2021-04-04 19:52:25 Read 'a:1:1'
-[DEBUG] 2021-04-04 19:56:19 Launching
-[INFO] 2021-04-04 19:56:19 Running interactive mode
-[DEBUG] 2021-04-04 19:56:22 Read 's:10'
-[DEBUG] 2021-04-04 19:56:25 Read 'a:1:1'
-[DEBUG] 2021-04-04 19:56:25 Read 'r'
-[INFO] 2021-04-04 19:56:25 Memory erased successfuly : 10 bytes freed
-[DEBUG] 2021-04-04 19:56:27 Read 'a:1:1'
-[ERROR] 2021-04-04 19:56:27 Memory not initialized
+[DEBUG] 2021-04-04 21:39:51 Launching
+[DEBUG] 2021-04-04 21:39:51 removeBlock() = 20
+[ERROR] 2021-04-04 21:39:51 Couldn't allocate block, not enough space
+[ERROR] 2021-04-04 21:39:51 Invalid block address
+[DEBUG] 2021-04-04 21:40:48 Launching
+[DEBUG] 2021-04-04 21:40:48 removeBlock() = 40
+[DEBUG] 2021-04-04 21:40:48 removeBlock() = 40
+[INFO] 2021-04-04 21:41:20 Launching
+[DEBUG] 2021-04-04 21:41:20 removeBlock() = 40
+[DEBUG] 2021-04-04 21:41:20 removeBlock() = 40
+[INFO] 2021-04-04 21:41:20 End of demo
+[INFO] 2021-04-04 21:43:37 Launching
+[INFO] 2021-04-04 21:43:37 initMemory(100)
+[INFO] 2021-04-04 21:43:37 myalloc(15)
+[INFO] 2021-04-04 21:43:37 myalloc(20)
+[INFO] 2021-04-04 21:43:37 myalloc(15)
+[INFO] 2021-04-04 21:43:37 myalloc(40)
+[INFO] 2021-04-04 21:43:37 block4 = myfree(block4)
+[DEBUG] 2021-04-04 21:43:37 removeBlock() = 40
+[INFO] 2021-04-04 21:43:37 myalloc(40)
+[INFO] 2021-04-04 21:43:37 myfree(block5)
+[DEBUG] 2021-04-04 21:43:37 removeBlock() = 40
+[INFO] 2021-04-04 21:43:37 freeMemory()
+[INFO] 2021-04-04 21:43:37 End of demo
