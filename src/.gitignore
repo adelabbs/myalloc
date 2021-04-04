@@ -1,4 +1,5 @@
 *.o
+*.log
 cli
 gui
 superconf.conf
