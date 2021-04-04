@@ -17,7 +17,7 @@ extern int optind;
 int log_fd;
 
 int main(int argc, char *argv[]) {
-    char format[] = "hib:c:";
+    char format[] = "hif:c:";
     int mode = RUN_INTERACTIVE;
     int option;
 
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         case 'i':
             interactiveModeHandler();
             break;
-        case 'b':
+        case 'f':
             batchModeHandler();
             break;
         case 'c':
@@ -42,14 +42,14 @@ int main(int argc, char *argv[]) {
             return 1;
         }
     }
-    //TODO Call generic run
+    return 0;
 }
 
 void display_options(char *usage) {
-    printf("Usage:\n%s [-hi] or[-b filePath] or [-c] [s:size] ([a:blockSize:blockId] || [f:blockId])^n \n", usage);
+    printf("Usage:\n%s [-hi] or[-f filePath] or [-c] [s:size] ([a:blockSize:blockId] || [f:blockId])^n \n", usage);
     printf("   -h : display this help\n");
     printf("   -i : interactive mode\n");
-    printf("   -b : batch mode\n");
+    printf("   -f : batch mode\n");
     printf("   -c : command-line mode\n");
 }
 

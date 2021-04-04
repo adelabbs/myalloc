@@ -20,10 +20,13 @@ int batch(char *filepath) {
     exit(EXIT_FAILURE);
   }
   else {
-    while (fgets(buffer, BUF_SIZE, file) != NULL) {
-      inputHandler(buffer, BUF_SIZE);
+    InputHandler handler;
+    initInputHandler(&handler);
+    while (fgets(buffer, BUF_SIZE - 1, file) != NULL) {
+      handleInput(&handler, buffer, BUF_SIZE);
       bzero(buffer, BUF_SIZE);
     }
+    destroyInputHandler(&handler);
   }
   return 0;
 }

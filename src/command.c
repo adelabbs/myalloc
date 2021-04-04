@@ -3,69 +3,130 @@
 #include <string.h>
 #include <errno.h>
 #include "command.h"
-#include "memory.h"
+#include "core.h"
 #include "util.h"
 #include "types.h"
 
 int readPositiveInt(char *field);
 extern int log_fd;
 
-void inputHandler(char *buffer, int maxBufferSize) {
-    char log[100];
-    snprintf(log, 100, "Read '%s'", buffer);
-    writeLog(log, SEVERITY_DEBUG, log_fd);
+void initInputHandler(InputHandler *inputHandler) {
+    inputHandler->addresses = NULL;
+}
 
-    char **fields = parseData(buffer, FIELDS_COUNT, SEPARATOR);
+void createInputHandler(InputHandler *inputHandler, int addressesCount) {
+    if (inputHandler != NULL) {
+        void **addresses = (void **)malloc(addressesCount * sizeof(void *));
+        if (addresses == NULL) {
+            perror("Couldn't create commandHandler");
+            exit(EXIT_FAILURE);
+        }
+        for(int i = 0; i < addressesCount; i++){
+            addresses[i] = NULL;
+        }
+        inputHandler->addresses = addresses;
+    }
+}
+
+void destroyInputHandler(InputHandler *inputHandler) {
+    if (inputHandler != NULL) {
+        if (inputHandler->addresses != NULL) {
+            free(inputHandler->addresses);
+        }
+    }
+}
+
+void handleInput(InputHandler *inputHandler, char *buffer, int maxBufferSize) {
+    char *log = (char *)malloc(100 * sizeof(char));
+
+    if (snprintf(log, 99, "Read '%s'", buffer) != -1) {
+        writeLog(log, SEVERITY_DEBUG, log_fd);
+    }
+    int fieldsCount;
+    char **fields = parseData(buffer, FIELDS_COUNT, SEPARATOR, &fieldsCount);
     if (fields == NULL) {
         writeLog("Couldn't parse input", SEVERITY_ERROR, log_fd);
         exit(EXIT_FAILURE);
     }
 
-    CommandType command = detectCommand(fields, FIELDS_COUNT);
-    void **addresses;
+    CommandType command = detectCommand(fields, fieldsCount);
+
     switch (command) {
     case COMMAND_INIT:
-        addresses = initCommandHandler(fields, FIELDS_COUNT);
+        initCommandHandler(inputHandler, fields, fieldsCount);
         break;
     case COMMAND_ALLOC:
-        allocCommandHandler(fields, FIELDS_COUNT, addresses);
+        allocCommandHandler(inputHandler, fields, fieldsCount);
         break;
     case COMMAND_FREE:
-        freeCommandHandler(fields, FIELDS_COUNT, addresses);
+        freeCommandHandler(inputHandler, fields, fieldsCount);
         break;
     }
 }
 
-void **initCommandHandler(char **fields, int n) {
-    char *sizeField = fields[1];
-    int size;
-    void **addresses = NULL;
-    if ((size = readPositiveInt(sizeField)) >= 0) {
-        initMemory(size);
-        addresses = (void **)malloc(size * sizeof(void *));
-        if (addresses == NULL) {
-            writeLog("Couldn't allocate memory", SEVERITY_ERROR, log_fd);
-            exit(EXIT_FAILURE);
+void initCommandHandler(InputHandler *inputHandler, char **fields, int n) {
+    if (n == 2) {
+        char *sizeField = fields[1];
+        int size;
+        if ((size = readPositiveInt(sizeField)) >= 0) {
+            initMemory(size);
+            createInputHandler(inputHandler, size);
+            if (inputHandler->addresses == NULL) {
+                writeLog("Couldn't allocate memory", SEVERITY_ERROR, log_fd);
+                exit(EXIT_FAILURE);
+            }
+        }
+        else {
+            writeLog("Invalid command format", SEVERITY_ERROR, log_fd);
         }
     }
-    return addresses;
-}
-
-void allocCommandHandler(char **fields, int n, void **addresses) {
-    char *sizeField = fields[1];
-    char *idField = fields[2];
-    int size, id;
-    if (((size = readPositiveInt(sizeField)) >= 0) && ((id = readPositiveInt(idField)) >= 0)) {
-        void *address = myalloc(size);
-        addresses[id] = address;
+    else {
+        writeLog("Invalid command format", SEVERITY_ERROR, log_fd);
     }
 }
 
-void freeCommandHandler(char **fields, int n, void **addresses) {
-    char *idField = fields[1];
-    int id;
-    if ((id = readPositiveInt(idField)) >= 0) {
-        myfree(addresses[id]);
+void allocCommandHandler(InputHandler *inputHandler, char **fields, int n) {
+    if (n == 3) {
+        if (inputHandler->addresses != NULL) {
+            char *sizeField = fields[1];
+            char *idField = fields[2];
+            int size, id;
+            if (((size = readPositiveInt(sizeField)) >= 0) && ((id = readPositiveInt(idField)) >= 0)) {
+                void *address = myalloc(size);
+                inputHandler->addresses[id] = address;
+            }
+            else {
+                writeLog("Invalid command format", SEVERITY_ERROR, log_fd);
+            }
+        }
+        else {
+            writeLog("Memory not initialized", SEVERITY_ERROR, log_fd);
+
+        }
+    }
+    else {
+        writeLog("Invalid command format", SEVERITY_ERROR, log_fd);
+    }
+}
+
+void freeCommandHandler(InputHandler *inputHandler, char **fields, int n) {
+    if (n == 2) {
+        if (inputHandler->addresses != NULL) {
+            char *idField = fields[1];
+            int id;
+            if ((id = readPositiveInt(idField)) >= 0) {
+                myfree(inputHandler->addresses[id]);
+            }
+            else {
+                writeLog("Invalid command format : not positive int", SEVERITY_ERROR, log_fd);
+            }
+        }
+        else {
+            writeLog("Memory not initialized", SEVERITY_ERROR, log_fd);
+        }
+    }
+    else {
+        writeLog("Invalid command format", SEVERITY_ERROR, log_fd);
     }
 }
 
@@ -77,21 +138,22 @@ void freeCommandHandler(char **fields, int n, void **addresses) {
  * @param separator
  * @return NULL if the data is not in the correct format or an array of fields
  */
-char **parseData(char *data, int count, char *separator) {
-    int correct = 0, cpt = 0;
+char **parseData(char *data, int count, char *separator, int *fieldsCount) {
+    int correct = 0;
+    *fieldsCount = 0;
     char **fields = (char **)malloc(count * sizeof(char *));
     if (fields == NULL) {
         perror("Couldn't allocate memory");
         exit(EXIT_FAILURE);
     }
     char *field = strtok(data, separator);
-    while (field != NULL && cpt < count) {
-        fields[cpt] = field;
-        cpt++;
+    while (field != NULL && *fieldsCount < count) {
+        fields[*fieldsCount] = field;
+        (*fieldsCount)++;
         field = strtok(NULL, separator);
     }
     //Check data
-    if ((field == NULL) && (cpt <= count)) {
+    if ((field == NULL) && (*fieldsCount <= count)) {
         correct = 1;
     }
     return (correct) ? fields : NULL;
@@ -117,6 +179,9 @@ CommandType detectCommand(char **fields, int n) {
         else if (strcmp(commandSlug, commandCodes[COMMAND_FREE]) == 0) {
             command = COMMAND_FREE;
         }
+    }
+    else {
+        writeLog("Invalid command format", SEVERITY_ERROR, log_fd);
     }
     return command;
 }
