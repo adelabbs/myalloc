@@ -16,7 +16,7 @@ extern int log_fd;
  */
 int initMemory(int nBytes) {
     memory = createMemory(nBytes, firstFit, freeMemoryBlock);
-    if(memory != NULL) displayMemory(memory);
+    if (memory != NULL) displayMemory(memory);
     return (memory != NULL) ? nBytes : 0;
 }
 
@@ -41,7 +41,7 @@ void *myalloc(int nBytes) {
  * @brief deallocation of a zone addressed by a pointer
  *
  * @param p
- * @return int -1 if error | size of the freed space 
+ * @return int -1 if error | size of the freed space
  */
 int myfree(void *p) {
     if (memory == NULL) {
@@ -57,17 +57,10 @@ int myfree(void *p) {
  * @return int -1 if error | total freed space
  */
 int freeMemory() {
-    int size;
-    char *log;
-    if (memory == NULL) {
-        log = "Memory already free";
-        size = -1;
-    }
-    else {
-        getMemorySize(memory);
+    int size = -1;
+    if (memory != NULL) {
+        size = getMemorySize(memory);
         destroyMemory(memory);
-        log = "Freed memory";
     }
-    writeLog(log, SEVERITY_DEBUG, log_fd);
     return size;
 }

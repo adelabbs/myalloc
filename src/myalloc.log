@@ -129,3 +129,92 @@
 [DEBUG] 2021-04-04 19:16:21 removeBlock() = 8
 [DEBUG] 2021-04-04 19:16:21 Read 'a:3:2'
 [DEBUG] 2021-04-04 19:16:21 Read 'a:4:3'
+[DEBUG] 2021-04-04 19:22:00 Launching
+[INFO] 2021-04-04 19:22:00 Running interactive mode
+[DEBUG] 2021-04-04 19:22:03 Read 's:100'
+[DEBUG] 2021-04-04 19:30:49 Launching
+[INFO] 2021-04-04 19:30:49 Running interactive mode
+[DEBUG] 2021-04-04 19:30:53 Read 's:10'
+[DEBUG] 2021-04-04 19:30:58 Read 'a:5'
+[ERROR] 2021-04-04 19:30:58 Invalid command format
+[DEBUG] 2021-04-04 19:31:01 Read 'r'
+[INFO] 2021-04-04 19:31:01 Memory erased successfuly
+[DEBUG] 2021-04-04 19:31:01 Freed memory
+[DEBUG] 2021-04-04 19:39:32 Launching
+[INFO] 2021-04-04 19:39:32 Running interactive mode
+[DEBUG] 2021-04-04 19:39:35 Read 's:10'
+[DEBUG] 2021-04-04 19:39:42 Read 'a:5'
+[ERROR] 2021-04-04 19:39:42 Invalid command format
+[DEBUG] 2021-04-04 19:39:46 Read 'a:5'
+[ERROR] 2021-04-04 19:39:46 Invalid command format
+[DEBUG] 2021-04-04 19:39:52 Read 'a:5:1'
+[DEBUG] 2021-04-04 19:39:55 Read 'r'
+[INFO] 2021-04-04 19:39:55 Memory erased successfuly : 1 bytes freed
+[DEBUG] 2021-04-04 19:40:39 Read 'a:5:1'
+[DEBUG] 2021-04-04 19:40:52 Launching
+[INFO] 2021-04-04 19:40:52 Running interactive mode
+[DEBUG] 2021-04-04 19:40:55 Read 's:10'
+[DEBUG] 2021-04-04 19:40:57 Read 'a:5:1'
+[DEBUG] 2021-04-04 19:40:58 Read 'r'
+[INFO] 2021-04-04 19:40:58 Memory erased successfuly : 1 bytes freed
+[DEBUG] 2021-04-04 19:40:59 Read 's:10'
+[DEBUG] 2021-04-04 19:41:02 Read 'r'
+[INFO] 2021-04-04 19:41:02 Memory erased successfuly : 1 bytes freed
+[DEBUG] 2021-04-04 19:41:05 Read 'a:5'
+[ERROR] 2021-04-04 19:41:05 Invalid command format
+[DEBUG] 2021-04-04 19:41:09 Read 'a:5:1'
+[DEBUG] 2021-04-04 19:41:49 Launching
+[INFO] 2021-04-04 19:41:49 Running interactive mode
+[DEBUG] 2021-04-04 19:41:53 Read 's:10'
+[DEBUG] 2021-04-04 19:41:56 Read 'a:10:1'
+[DEBUG] 2021-04-04 19:41:57 Read 'r'
+[INFO] 2021-04-04 19:41:57 Memory erased successfuly : 1 bytes freed
+[DEBUG] 2021-04-04 19:42:55 Launching
+[INFO] 2021-04-04 19:42:55 Running interactive mode
+[DEBUG] 2021-04-04 19:42:58 Read 's:10'
+[DEBUG] 2021-04-04 19:42:59 Read 'r'
+[INFO] 2021-04-04 19:42:59 Memory erased successfuly : 10 bytes freed
+[DEBUG] 2021-04-04 19:44:48 Launching
+[INFO] 2021-04-04 19:44:48 Running interactive mode
+[DEBUG] 2021-04-04 19:44:50 Read 'r'
+[ERROR] 2021-04-04 19:44:50 No memory
+[DEBUG] 2021-04-04 19:44:58 Read 's:10'
+[DEBUG] 2021-04-04 19:44:59 Read 'r'
+[INFO] 2021-04-04 19:44:59 Memory erased successfuly : 10 bytes freed
+[DEBUG] 2021-04-04 19:45:02 Read 'a:10'
+[ERROR] 2021-04-04 19:45:02 Invalid command format
+[DEBUG] 2021-04-04 19:45:05 Read 'a:10:1'
+[DEBUG] 2021-04-04 19:46:56 Launching
+[INFO] 2021-04-04 19:46:56 Running interactive mode
+[DEBUG] 2021-04-04 19:46:58 Read 's:10'
+[DEBUG] 2021-04-04 19:47:00 Read 'a:5:1'
+[DEBUG] 2021-04-04 19:47:00 Read 'r'
+[INFO] 2021-04-04 19:47:00 Memory erased successfuly : 10 bytes freed
+[DEBUG] 2021-04-04 19:47:02 Read 'a:5:1'
+[DEBUG] 2021-04-04 19:47:57 Launching
+[INFO] 2021-04-04 19:47:57 Running interactive mode
+[DEBUG] 2021-04-04 19:47:58 Read 'r'
+[ERROR] 2021-04-04 19:47:58 No memory
+[DEBUG] 2021-04-04 19:48:02 Read 's:100'
+[DEBUG] 2021-04-04 19:48:04 Read 'r'
+[INFO] 2021-04-04 19:48:04 Memory erased successfuly : 100 bytes freed
+[DEBUG] 2021-04-04 19:48:06 Read 'a:10:1'
+[DEBUG] 2021-04-04 19:49:34 Launching
+[INFO] 2021-04-04 19:49:34 Running interactive mode
+[DEBUG] 2021-04-04 19:49:37 Read 's:10'
+[DEBUG] 2021-04-04 19:49:39 Read 'r'
+[DEBUG] 2021-04-04 19:52:13 Launching
+[INFO] 2021-04-04 19:52:13 Running interactive mode
+[DEBUG] 2021-04-04 19:52:18 Read 's:10'
+[DEBUG] 2021-04-04 19:52:22 Read 'a:1:2'
+[DEBUG] 2021-04-04 19:52:23 Read 'r'
+[INFO] 2021-04-04 19:52:23 Memory erased successfuly : 10 bytes freed
+[DEBUG] 2021-04-04 19:52:25 Read 'a:1:1'
+[DEBUG] 2021-04-04 19:56:19 Launching
+[INFO] 2021-04-04 19:56:19 Running interactive mode
+[DEBUG] 2021-04-04 19:56:22 Read 's:10'
+[DEBUG] 2021-04-04 19:56:25 Read 'a:1:1'
+[DEBUG] 2021-04-04 19:56:25 Read 'r'
+[INFO] 2021-04-04 19:56:25 Memory erased successfuly : 10 bytes freed
+[DEBUG] 2021-04-04 19:56:27 Read 'a:1:1'
+[ERROR] 2021-04-04 19:56:27 Memory not initialized

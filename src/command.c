@@ -8,6 +8,7 @@
 #include "types.h"
 
 int readPositiveInt(char *field);
+int check(InputHandler *inputHandler);
 extern int log_fd;
 
 void initInputHandler(InputHandler *inputHandler) {
@@ -32,6 +33,7 @@ void destroyInputHandler(InputHandler *inputHandler) {
     if (inputHandler != NULL) {
         if (inputHandler->addresses != NULL) {
             free(inputHandler->addresses);
+            inputHandler->addresses = NULL;
         }
     }
 }
@@ -106,6 +108,21 @@ void initCommandHandler(InputHandler *inputHandler, char **fields, int n) {
 }
 
 /**
+ * @brief checks if the inputHandler is correctly initialised
+ *
+ * @param inputHandler
+ * @return int 0 if error
+ */
+int check(InputHandler *inputHandler) {
+    int exists = (inputHandler != NULL);
+    int init = 0;
+    if (exists) {
+        init = (inputHandler->addresses) != NULL;
+    }
+    return exists && init;
+}
+
+/**
  * @brief
  *
  * @param inputHandler
@@ -114,7 +131,8 @@ void initCommandHandler(InputHandler *inputHandler, char **fields, int n) {
  */
 void allocCommandHandler(InputHandler *inputHandler, char **fields, int n) {
     if (n == 3) {
-        if (inputHandler->addresses != NULL) {
+        if (check(inputHandler)) {
+            printf("inputHandler = %p\n", inputHandler);
             char *sizeField = fields[1];
             char *idField = fields[2];
             int size, id;
@@ -149,7 +167,7 @@ void allocCommandHandler(InputHandler *inputHandler, char **fields, int n) {
  */
 void freeCommandHandler(InputHandler *inputHandler, char **fields, int n) {
     if (n == 2) {
-        if (inputHandler->addresses != NULL) {
+        if (check(inputHandler)) {
             char *idField = fields[1];
             int id;
             int r;
@@ -173,10 +191,23 @@ void freeCommandHandler(InputHandler *inputHandler, char **fields, int n) {
 }
 
 void removeMemoryHandler(InputHandler *inputHandler) {
-    if(inputHandler->addresses != NULL) {
-        writeLog("Memory erased successfuly", SEVERITY_INFO, log_fd);
-        printf("FREE MEMORY%d\n",freeMemory());
-    } else {
+    if (inputHandler->addresses != NULL) {
+        int r;
+        char *log = (char *)malloc(100 * sizeof(char));
+        if (log == NULL) {
+            perror("Couldn't allocate string log memory");
+            exit(EXIT_FAILURE);
+        }
+        if ((r = freeMemory()) != -1) {
+            destroyInputHandler(inputHandler);
+            sprintf(log, "Memory erased successfuly : %d bytes freed", r);
+        }
+        else {
+            log = "Didn't free memory";
+        }
+        writeLog(log, SEVERITY_INFO, log_fd);
+    }
+    else {
         writeLog("No memory", SEVERITY_ERROR, log_fd);
     }
 }
@@ -229,10 +260,10 @@ CommandType detectCommand(char **fields, int n) {
         }
         else if (strcmp(commandSlug, commandCodes[COMMAND_FREE]) == 0) {
             command = COMMAND_FREE;
-        } 
+        }
         else if (strcmp(commandSlug, commandCodes[COMMAND_END]) == 0) {
             command = COMMAND_END;
-        } 
+        }
     }
     else {
         writeLog("Invalid command format", SEVERITY_ERROR, log_fd);
