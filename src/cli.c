@@ -7,11 +7,14 @@ extern char *optarg;
 extern int optind;
 
 int cli(int argc, char *argv[]) {
+    InputHandler handler;
+    initInputHandler(&handler);
     /**
      * We start at optind -1 because the cli option requires at least one argument 
      * 
      */
     for (optind = optind - 1; optind < argc; optind++) {
-        inputHandler(argv[optind], strlen(argv[optind]));
+        handleInput(&handler, argv[optind], strlen(argv[optind]));
     }
+    destroyInputHandler(&handler);
 }

@@ -9,7 +9,7 @@ util.o : util.c util.h types.h
 types.o : types.c types.h
 	gcc -c types.c
 
-command.o : command.c command.h memory.h util.h types.h
+command.o : command.c command.h core.h util.h types.h
 	gcc -c command.c
 
 testFirstFit.o : testFirstFit.c
@@ -48,11 +48,11 @@ testcore : testcore.o core.o default_strategies.o memory_internal.o
 firstfit : memory.o testFirstFit.o
 	gcc memory.o testFirstFit.o -o firstfit
 
-cli : main.o memory.o cli.o batch.o types.o util.o command.o interactive.o 
-	gcc main.o memory.o batch.o cli.o types.o util.o command.o interactive.o -o cli
+cli : main.o core.o default_strategies.o memory_internal.o cli.o batch.o types.o util.o command.o interactive.o 
+	gcc main.o core.o default_strategies.o memory_internal.o batch.o cli.o types.o util.o command.o interactive.o -o cli
 
-gui : gui.o batch.o command.o util.o memory.o types.o
-	gcc -o gui gui.o batch.o command.o util.o memory.o types.o -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
+gui : gui.o batch.o command.o util.o  core.o default_strategies.o memory_internal.o types.o
+	gcc -o gui gui.o batch.o command.o util.o  core.o default_strategies.o memory_internal.o types.o -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
 
 clean :
 	rm -f firstfit cli gui *.o

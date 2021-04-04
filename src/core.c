@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "core.h"
+#include "util.h"
 #include "memory_internal.h"
 #include "default_strategies.h"
 
 extern MemoryPtr memory;
+extern int log_fd;
 
 /**
  * @brief initialization of the work area
@@ -25,6 +27,10 @@ int initMemory(int nBytes) {
  * @return void*
  */
 void *myalloc(int nBytes) {
+    if (memory == NULL) {
+        writeLog("Memory is not initialized", SEVERITY_ERROR, log_fd);
+        exit(EXIT_FAILURE);
+    }
     return allocationStrategy(memory)(memory, nBytes);
 }
 
@@ -35,6 +41,10 @@ void *myalloc(int nBytes) {
  * @return int
  */
 int myfree(void *p) {
+    if (memory == NULL) {
+        writeLog("Memory is not initialized", SEVERITY_ERROR, log_fd);
+        exit(EXIT_FAILURE);
+    }
     return freeStrategy(memory)(memory, p);
 }
 
@@ -44,5 +54,17 @@ int myfree(void *p) {
  * @return int
  */
 int freeMemory() {
-    destroyMemory(memory);
+    int size;
+    char *log;
+    if (memory == NULL) {
+        log = "Memory already free";
+        size = 0;
+    }
+    else {
+        getMemorySize(memory);
+        destroyMemory(memory);
+        "Free memory";
+    }
+    writeLog(log, SEVERITY_DEBUG, log_fd);
+    return size;
 }

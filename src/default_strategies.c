@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "memory_internal.h"
+#include "util.h"
+
+extern int log_fd;
 
 void *firstFit(MemoryPtr memory, int nBytes) {
     if (getMemoryAvailableSpace(memory) < nBytes) {
@@ -42,7 +45,7 @@ void *firstFit(MemoryPtr memory, int nBytes) {
 int freeMemoryBlock(MemoryPtr memory, void *p) {
     /* Check if the pointer is valid*/
     if (p == NULL) {
-        perror("Invalid address");
+        writeLog("Invalid block address",  SEVERITY_ERROR, log_fd);
         exit(EXIT_FAILURE);
     }
     BlockListPtr bl = getMemoryBlockList(memory);
