@@ -19,9 +19,9 @@ typedef int (*MemoryFreeStrategy)(MemoryPtr memory, void *p);
 extern MemoryPtr memory;
 
 BlockListPtr createBlockList(void);
-void destroyBlockList(BlockListPtr blockList);
+void destroyBlockList(BlockListPtr *blockList);
 void addBlock(BlockListPtr blockList, int size, int position);
-int removeBlock(BlockListPtr blockList, int position, MemoryPtr memory);
+int removeBlock(BlockListPtr *blockList, int position, MemoryPtr memory);
 int countBlocks(BlockListPtr bl);
 
 

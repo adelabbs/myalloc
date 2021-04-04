@@ -24,13 +24,13 @@ interactive.o : interactive.c interactive.h
 memory.o : memory.c memory.h
 	gcc -c memory.c
 
-memory_internal.o : memory_internal.c memory_internal.h memory_interface.h 
+memory_internal.o : memory_internal.c memory_internal.h memory_interface.h util.h
 	gcc -c memory_internal.c
 
-default_strategies.o : default_strategies.c default_strategies.h memory_internal.h 
+default_strategies.o : default_strategies.c default_strategies.h memory_internal.h  util.h
 	gcc -c  default_strategies.c
 
-core.o : core.c core.h default_strategies.h memory_internal.h
+core.o : core.c core.h default_strategies.h memory_internal.h util.h
 	gcc -c  core.c
 
 main.o : main.c cli.h batch.h interactive.h util.h

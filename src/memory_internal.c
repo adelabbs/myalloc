@@ -67,7 +67,7 @@ MemoryPtr createMemory(int size, MemoryAllocationStrategy allocationStrategy, Me
  */
 void destroyMemory(MemoryPtr memory) {
     BlockListPtr blockList = getMemoryBlockList(memory);
-    destroyBlockList(blockList);
+    destroyBlockList(&blockList);
     free(memory);
 }
 
@@ -150,20 +150,24 @@ void addBlock(BlockListPtr blockList, int size, int position) {
  */
 BlockListPtr *searchBlock(BlockListPtr *blockList, int position) {
     if (isEmptyBlockList(*blockList)) {
+        printf("empty\n");
         return blockList;
     }
     else if (getBlockPosition(*blockList) == position) {
+        printf("match\n");
         return blockList;
     }
     else {
-        searchBlock(&(*blockList)->next, position);
+        searchBlock(&((*blockList)->next), position);
     }
 }
 
-int removeBlock(BlockListPtr blockList, int position, MemoryPtr memory) {
+int removeBlock(BlockListPtr *blockList, int position, MemoryPtr memory) {
     BlockListPtr *block;
     int r = -1;
-    if ((block = searchBlock(&blockList, position)) != NULL) {
+    printf("here\n");
+    printf("bl = %p\n", *blockList);
+    if ((block = searchBlock(blockList, position)) != NULL) {
         int blockSize = getBlockSize(*block);
         r = blockSize;
         removeBlockHead(block);
@@ -179,9 +183,9 @@ void removeBlockHead(BlockListPtr *blockList) {
     free(tmp);
 }
 
-void destroyBlockList(BlockListPtr blockList) {
-    while (!isEmptyBlockList(blockList)) {
-        removeBlockHead(&blockList);
+void destroyBlockList(BlockListPtr *blockList) {
+    while (!isEmptyBlockList(*blockList)) {
+        removeBlockHead(blockList);
     }
 }
 
