@@ -84,6 +84,7 @@ gboolean on_memory_draw(GtkWidget *widget, cairo_t *cr, gpointer data) {
         int positionY = 0;
         int currentBlockSize = 0;
         int blockIndice = 0;
+        int blockPos = 0;
 
         width = gtk_widget_get_allocated_width(widget);
         height = gtk_widget_get_allocated_height(widget);
@@ -93,12 +94,21 @@ gboolean on_memory_draw(GtkWidget *widget, cairo_t *cr, gpointer data) {
                 positionY += size + 1;
                 positionX = 0;
             }
+
             if(bl != NULL){
-                cairo_rectangle (cr, positionX, positionY, size, size);
-                cairo_set_source_rgba (cr, 1, 0, 0, 1);
-                cairo_fill (cr);
-                blockIndice ++;
+                blockPos = getBlockPosition(bl);
                 currentBlockSize = getBlockSize(bl);
+                if(i >= blockPos && i < blockPos + currentBlockSize){
+                    cairo_rectangle (cr, positionX, positionY, size, size);
+                    cairo_set_source_rgba (cr, 1, 0, 0, 1);
+                    cairo_fill (cr);
+                } else {
+                    cairo_rectangle (cr, positionX, positionY, size, size);
+                    cairo_set_source_rgba (cr, 1, 1, 1, 1);
+                    cairo_fill (cr);
+                }
+
+                blockIndice ++;
             } else {
                 cairo_rectangle (cr, positionX, positionY, size, size);
                 cairo_set_source_rgba (cr, 1, 1, 1, 1);
@@ -106,8 +116,8 @@ gboolean on_memory_draw(GtkWidget *widget, cairo_t *cr, gpointer data) {
             }
 
             if(blockIndice == currentBlockSize && bl != NULL)  {
-            blockIndice = 0;
-            bl = getNextBlock(bl);
+                blockIndice = 0;
+                bl = getNextBlock(bl);
             }
 
             positionX += size + 1;
