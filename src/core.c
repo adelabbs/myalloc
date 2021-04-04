@@ -11,39 +11,42 @@ extern int log_fd;
 /**
  * @brief initialization of the work area
  *
- * @param nBytes
- * @return int
+ * @param nBytes number of bytes to allocate
+ * @return int 0 if error | number of allocated bytes
  */
 int initMemory(int nBytes) {
     memory = createMemory(nBytes, firstFit, freeMemoryBlock);
-    displayMemory(memory);
-    return (memory != NULL) ? 0 : -1;
+    if(memory != NULL) displayMemory(memory);
+    return (memory != NULL) ? nBytes : 0;
 }
 
 /**
  * @brief dynamic memory allocation in the area
  *
  * @param nBytes
- * @return void*
+ * @return void* NULL if error | address allocated
  */
 void *myalloc(int nBytes) {
-    if (memory == NULL) {
-        writeLog("Memory is not initialized", SEVERITY_ERROR, log_fd);
-        exit(EXIT_FAILURE);
+    void *address = 0;
+    if (memory != NULL) {
+        address = allocationStrategy(memory)(memory, nBytes);
     }
-    return allocationStrategy(memory)(memory, nBytes);
+    else {
+        writeLog("Memory is not initialized", SEVERITY_ERROR, log_fd);
+    }
+    return address;
 }
 
 /**
  * @brief deallocation of a zone addressed by a pointer
  *
  * @param p
- * @return int
+ * @return int -1 if error | size of the freed space 
  */
 int myfree(void *p) {
     if (memory == NULL) {
         writeLog("Memory is not initialized", SEVERITY_ERROR, log_fd);
-        exit(EXIT_FAILURE);
+        return -1;
     }
     return freeStrategy(memory)(memory, p);
 }
@@ -51,19 +54,19 @@ int myfree(void *p) {
 /**
  * @brief free of the area initially reserved
  *
- * @return int
+ * @return int -1 if error | total freed space
  */
 int freeMemory() {
     int size;
     char *log;
     if (memory == NULL) {
         log = "Memory already free";
-        size = 0;
+        size = -1;
     }
     else {
         getMemorySize(memory);
         destroyMemory(memory);
-        "Free memory";
+        log = "Freed memory";
     }
     writeLog(log, SEVERITY_DEBUG, log_fd);
     return size;

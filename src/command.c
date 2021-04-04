@@ -21,7 +21,7 @@ void createInputHandler(InputHandler *inputHandler, int addressesCount) {
             perror("Couldn't create commandHandler");
             exit(EXIT_FAILURE);
         }
-        for(int i = 0; i < addressesCount; i++){
+        for (int i = 0; i < addressesCount; i++) {
             addresses[i] = NULL;
         }
         inputHandler->addresses = addresses;
@@ -36,6 +36,13 @@ void destroyInputHandler(InputHandler *inputHandler) {
     }
 }
 
+/**
+ * @brief
+ *
+ * @param inputHandler
+ * @param buffer
+ * @param maxBufferSize
+ */
 void handleInput(InputHandler *inputHandler, char *buffer, int maxBufferSize) {
     char *log = (char *)malloc(100 * sizeof(char));
 
@@ -66,12 +73,22 @@ void handleInput(InputHandler *inputHandler, char *buffer, int maxBufferSize) {
     }
 }
 
+/**
+ * @brief
+ *
+ * @param inputHandler
+ * @param fields
+ * @param n
+ */
 void initCommandHandler(InputHandler *inputHandler, char **fields, int n) {
     if (n == 2) {
         char *sizeField = fields[1];
-        int size;
+        int size, r;
         if ((size = readPositiveInt(sizeField)) >= 0) {
-            initMemory(size);
+            if ((r = initMemory(size)) == 0) {
+                writeLog("Memory initialization failed", SEVERITY_ERROR, log_fd);
+                exit(EXIT_FAILURE);
+            }
             createInputHandler(inputHandler, size);
             if (inputHandler->addresses == NULL) {
                 writeLog("Couldn't allocate memory", SEVERITY_ERROR, log_fd);
@@ -87,6 +104,13 @@ void initCommandHandler(InputHandler *inputHandler, char **fields, int n) {
     }
 }
 
+/**
+ * @brief
+ *
+ * @param inputHandler
+ * @param fields
+ * @param n
+ */
 void allocCommandHandler(InputHandler *inputHandler, char **fields, int n) {
     if (n == 3) {
         if (inputHandler->addresses != NULL) {
@@ -95,6 +119,10 @@ void allocCommandHandler(InputHandler *inputHandler, char **fields, int n) {
             int size, id;
             if (((size = readPositiveInt(sizeField)) >= 0) && ((id = readPositiveInt(idField)) >= 0)) {
                 void *address = myalloc(size);
+                if (address == NULL) {
+                    writeLog("Didn't allocate block", SEVERITY_ERROR, log_fd);
+                    exit(EXIT_FAILURE);
+                }
                 inputHandler->addresses[id] = address;
             }
             else {
@@ -111,13 +139,24 @@ void allocCommandHandler(InputHandler *inputHandler, char **fields, int n) {
     }
 }
 
+/**
+ * @brief
+ *
+ * @param inputHandler
+ * @param fields
+ * @param n
+ */
 void freeCommandHandler(InputHandler *inputHandler, char **fields, int n) {
     if (n == 2) {
         if (inputHandler->addresses != NULL) {
             char *idField = fields[1];
             int id;
+            int r;
             if ((id = readPositiveInt(idField)) >= 0) {
-                myfree(inputHandler->addresses[id]);
+                if ((r = myfree(inputHandler->addresses[id])) == -1) {
+                    writeLog("Didn't free block", SEVERITY_ERROR, log_fd);
+                    exit(EXIT_FAILURE);
+                }
             }
             else {
                 writeLog("Invalid command format : not positive int", SEVERITY_ERROR, log_fd);

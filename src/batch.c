@@ -9,13 +9,18 @@
 #define FIELDS 3
 #define SEPARATOR ":"
 
+/**
+ * @brief The batch mode processing function
+ *
+ * @param filepath
+ * @return int
+ */
 int batch(char *filepath) {
   FILE *file;
   char buffer[BUF_SIZE];
   bzero(buffer, BUF_SIZE);
 
   if ((file = fopen(filepath, "r")) == NULL) {
-    //TODO log
     perror("file not found !");
     exit(EXIT_FAILURE);
   }

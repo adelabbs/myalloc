@@ -6,6 +6,10 @@
 #define FIELDS_COUNT 3
 #define SEPARATOR ":"
 
+/**
+ * @brief The InputHandler structure is used to store addresses
+ * 
+ */
 typedef struct {
     void **addresses;
 }InputHandler;

@@ -34,6 +34,14 @@ MemoryFreeStrategy freeStrategy(MemoryPtr memory) {
     return memory->freeStrategy;
 }
 
+/**
+ * @brief Create a Memory object
+ * 
+ * @param size 
+ * @param allocationStrategy 
+ * @param freeStrategy 
+ * @return MemoryPtr 
+ */
 MemoryPtr createMemory(int size, MemoryAllocationStrategy allocationStrategy, MemoryFreeStrategy freeStrategy) {
     MemoryPtr memory = (MemoryPtr)malloc(sizeof * memory);
     if (memory != NULL) {
@@ -52,6 +60,11 @@ MemoryPtr createMemory(int size, MemoryAllocationStrategy allocationStrategy, Me
     return memory;
 }
 
+/**
+ * @brief Destroy the Memory object
+ * 
+ * @param memory 
+ */
 void destroyMemory(MemoryPtr memory) {
     BlockListPtr blockList = getMemoryBlockList(memory);
     destroyBlockList(blockList);
@@ -87,6 +100,11 @@ BlockListPtr getNextBlock(BlockListPtr blockList) {
     return blockList->next;
 }
 
+/**
+ * @brief Create a Block List object
+ * 
+ * @return BlockListPtr 
+ */
 BlockListPtr createBlockList(void) {
     BlockListPtr blocklist = (BlockListPtr)malloc(sizeof(*blocklist));
     if (blocklist == NULL) {
@@ -104,13 +122,13 @@ int getSizeBetweenNextBLock(BlockListPtr bl) {
     return getBlockPosition(getNextBlock(bl)) - (getBlockPosition(bl) + getBlockSize(bl));
 }
 
-void displayBlockList(BlockListPtr blockList) {
-    while (!isEmptyBlockList(blockList)) {
-        printf("%d\t\t| %d\n", getBlockPosition(blockList), getBlockSize(blockList));
-        blockList = getNextBlock(blockList);
-    }
-}
-
+/**
+ * @brief Insert a block after the current block
+ * 
+ * @param blockList 
+ * @param size 
+ * @param position 
+ */
 void addBlock(BlockListPtr blockList, int size, int position) {
     BlockListPtr block = createBlockList();
     if (block == NULL) {
@@ -123,6 +141,13 @@ void addBlock(BlockListPtr blockList, int size, int position) {
     blockList->next = block;
 }
 
+/**
+ * @brief tries to find the address of a block that has the given position 
+ * 
+ * @param blockList
+ * @param position 
+ * @return BlockListPtr* NULL if no match found 
+ */
 BlockListPtr *searchBlock(BlockListPtr *blockList, int position) {
     if (isEmptyBlockList(*blockList)) {
         return blockList;
@@ -135,13 +160,16 @@ BlockListPtr *searchBlock(BlockListPtr *blockList, int position) {
     }
 }
 
-void removeBlock(BlockListPtr blockList, int position, MemoryPtr memory) {
+int removeBlock(BlockListPtr blockList, int position, MemoryPtr memory) {
     BlockListPtr *block;
+    int r = -1;
     if ((block = searchBlock(&blockList, position)) != NULL) {
         int blockSize = getBlockSize(*block);
+        r = blockSize;
         removeBlockHead(block);
         setMemoryAvailableSpace(memory, getMemoryAvailableSpace(memory) + blockSize);
     }
+    return r;
 }
 
 void removeBlockHead(BlockListPtr *blockList) {
@@ -156,6 +184,7 @@ void destroyBlockList(BlockListPtr blockList) {
         removeBlockHead(&blockList);
     }
 }
+
 
 int countBlocks(BlockListPtr bl) {
     int blocks = 0;

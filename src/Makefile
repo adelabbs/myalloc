@@ -1,4 +1,7 @@
-all : cli gui
+all : cli gui doc
+
+doc :
+	doxygen doxygen.conf
 
 util.o : util.c util.h types.h
 	gcc -c util.c
@@ -43,4 +46,4 @@ gui : gui.o batch.o command.o util.o  core.o default_strategies.o memory_interna
 	gcc -o gui gui.o batch.o command.o util.o  core.o default_strategies.o memory_internal.o types.o -Wall `pkg-config --cflags --libs gtk+-3.0` -export-dynamic
 
 clean :
-	rm -f cli gui *.o
+	rm -f cli gui latex html *.o
