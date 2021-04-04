@@ -1,8 +1,8 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
-#include "memory.h"
 #include "batch.h"
 #include "util.h"
+#include "memory_internal.h"
 
 GtkBuilder      *builder; 
 GtkWidget       *window;
@@ -46,10 +46,18 @@ int main(int argc, char *argv[])
     return 0;
 }
 
+/**
+ * @brief 
+ * 
+ */
 void on_window_main_destroy() {
     gtk_main_quit();
 }
 
+/**
+ * @brief Function for button clicker
+ * 
+ */
 void on_read_button_clicked() {
     if(filepath != NULL) {
         printf("%s\n",filepath);
@@ -66,41 +74,44 @@ void on_file_choser_file_set() {
 gboolean on_memory_draw(GtkWidget *widget, cairo_t *cr, gpointer data) {
 	guint width, height;
 
-    int totalOfBlocks = getMemorySize(memory);
-    BlockList bl = getBlockList(memory);
+    if(memory != NULL) {
+        int totalOfBlocks = getMemorySize(memory);
+        BlockListPtr bl = getMemoryBlockList(memory);
+        
 
-	int size = 10;
-    int positionX = 0;
-    int positionY = 0;
-    int currentBlockSize = 0;
-    int blockIndice = 0;
+        int size = 10;
+        int positionX = 0;
+        int positionY = 0;
+        int currentBlockSize = 0;
+        int blockIndice = 0;
 
-	width = gtk_widget_get_allocated_width(widget);
-	height = gtk_widget_get_allocated_height(widget);
+        width = gtk_widget_get_allocated_width(widget);
+        height = gtk_widget_get_allocated_height(widget);
 
-    for(int i = 0; i < totalOfBlocks; i++) {
-        if(positionX >= height) {
-            positionY += size + 1;
-            positionX = 0;
+        for(int i = 0; i < totalOfBlocks; i++) {
+            if(positionX >= height) {
+                positionY += size + 1;
+                positionX = 0;
+            }
+            if(bl != NULL){
+                cairo_rectangle (cr, positionX, positionY, size, size);
+                cairo_set_source_rgba (cr, 1, 0, 0, 1);
+                cairo_fill (cr);
+                blockIndice ++;
+                currentBlockSize = getBlockSize(bl);
+            } else {
+                cairo_rectangle (cr, positionX, positionY, size, size);
+                cairo_set_source_rgba (cr, 1, 1, 1, 1);
+                cairo_fill (cr);
+            }
+
+            if(blockIndice == currentBlockSize && bl != NULL)  {
+            blockIndice = 0;
+            bl = getNextBlock(bl);
+            }
+
+            positionX += size + 1;
         }
-        if(bl != NULL){
-            cairo_rectangle (cr, positionX, positionY, size, size);
-            cairo_set_source_rgba (cr, 1, 0, 0, 1);
-            cairo_fill (cr);
-            blockIndice ++;
-            currentBlockSize = getBlockSize(bl);
-        } else {
-            cairo_rectangle (cr, positionX, positionY, size, size);
-            cairo_set_source_rgba (cr, 1, 1, 1, 1);
-            cairo_fill (cr);
-        }
-
-        if(blockIndice == currentBlockSize && bl != NULL)  {
-           blockIndice = 0;
-           bl = getNextBlock(bl);
-        }
-
-        positionX += size + 1;
     }
 	return FALSE;	
 }

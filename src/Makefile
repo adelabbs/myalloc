@@ -33,7 +33,7 @@ core.o : core.c core.h default_strategies.h memory_internal.h
 main.o : main.c cli.h batch.h interactive.h util.h
 	gcc -c main.c
 
-gui.o : memory.h batch.h command.h util.h types.h
+gui.o : memory_internal.h batch.h command.h util.h types.h
 	gcc -c gui.c `pkg-config --cflags --libs gtk+-3.0`
 
 cli : main.o core.o default_strategies.o memory_internal.o cli.o batch.o types.o util.o command.o interactive.o 
