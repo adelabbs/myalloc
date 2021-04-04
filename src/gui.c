@@ -13,6 +13,13 @@ int log_fd;
 
 char *filepath;
 
+/**
+ * @brief GUI launcher
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
 int main(int argc, char *argv[])
 {
     initLog(&log_fd, "gui.log");
