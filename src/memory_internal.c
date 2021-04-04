@@ -1,41 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "memory2.h"
+#include "memory_internal.h"
 
-struct Memory {
-    int size;
-    int availableSpace;
-    void *address;
-    BlockListPtr blockList;
-    MemoryAllocationStrategy allocationStrategy;
-    MemoryFreeStrategy freeStrategy;
-};
-
-struct BlockList {
-    int position;
-    int size;
-    struct BlockList *next;
-};
-
-MemoryPtr memory;
-
-int getMemorySize(MemoryPtr memory);
-int getMemoryAvailableSpace(MemoryPtr memory);
-void setMemoryAvailableSpace(MemoryPtr memory, int availableSpace);
-void *getMemoryAddress(MemoryPtr memory);
-BlockListPtr getMemoryBlockList(MemoryPtr memory);
-
-int getBlockPosition(BlockListPtr blockList);
-int getBlockPosition(BlockListPtr blockList);
-int getBlockSize(BlockListPtr blockList);
-BlockListPtr getNextBlock(BlockListPtr blockList);
-int getSizeBetweenNextBLock(BlockListPtr bl);
-
-int isEmptyBlockList(BlockListPtr blockList);
-void removeBlockHead(BlockListPtr *blockList);
-
-int firstFit(MemoryPtr memory, int nBytes);
-
+/********* Memory functions ******/
 
 int getMemorySize(MemoryPtr memory) {
     return memory->size;
@@ -57,6 +24,14 @@ void *getMemoryAddress(MemoryPtr memory) {
 
 BlockListPtr getMemoryBlockList(MemoryPtr memory) {
     return memory->blockList;
+}
+
+MemoryAllocationStrategy allocationStrategy(MemoryPtr memory) {
+    return memory->allocationStrategy;
+}
+
+MemoryFreeStrategy freeStrategy(MemoryPtr memory) {
+    return memory->freeStrategy;
 }
 
 MemoryPtr createMemory(int size, MemoryAllocationStrategy allocationStrategy, MemoryFreeStrategy freeStrategy) {
@@ -97,65 +72,7 @@ void displayMemory(MemoryPtr memory) {
     printf("--------------------------\n");
 }
 
-/***********ALLOCATION STRATEGY*********/
-
-int firstFit(MemoryPtr memory, int nBytes) {
-    if (getMemoryAvailableSpace(memory) < nBytes) {
-        perror("Couldn't allocate block, not enough space");
-        exit(EXIT_FAILURE);
-    }
-    int position = 0;
-    BlockListPtr bl = getMemoryBlockList(memory);
-    if (isEmptyBlockList(bl)) {
-        BlockListPtr block = (BlockListPtr)malloc(sizeof(*block));
-        if (block == NULL) {
-            perror("Couldn't allocate memory in function createBlockList()");
-            exit(EXIT_FAILURE);
-        }
-        block->position = position;
-        block->size = nBytes;
-        block->next = NULL;
-        memory->blockList = block;
-    }
-    else {
-        int stop = 0;
-        position += getBlockSize(bl);
-        while (getNextBlock(bl) != NULL && !stop) {
-            if (getSizeBetweenNextBLock(bl) >= nBytes) {
-                stop = 1;
-            }
-            else {
-                bl = getNextBlock(bl);
-                position += getBlockSize(bl);
-            }
-        }
-        addBlock(bl, nBytes, position);
-    }
-    setMemoryAvailableSpace(memory, getMemoryAvailableSpace(memory) - nBytes);
-    return position;
-}
-
-void *allocMemory(int nBytes, MemoryPtr memory) {
-    int position = firstFit(memory, nBytes);
-    displayMemory(memory);
-    return getMemoryAddress(memory) + position;
-}
-
-int freeMemoryBlock(void *p, MemoryPtr m) {
-    /* Check if the pointer is valid*/
-    if (p == NULL) {
-        perror("Invalid address");
-        exit(EXIT_FAILURE);
-    }
-    BlockListPtr bl = getMemoryBlockList(m);
-    int position = p - getMemoryAddress(m);
-    /* Partial search of the block in the blockList*/
-    removeBlock(bl, position, m);
-    displayMemory(m);
-    return 0;
-}
-
-/********** BlockList ********/
+/********BlockList functions *******/
 
 
 int getBlockPosition(BlockListPtr blockList) {

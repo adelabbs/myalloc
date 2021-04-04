@@ -27,6 +27,21 @@ interactive.o : interactive.c interactive.h
 main.o : main.c cli.h batch.h interactive.h util.h
 	gcc -c main.c
 
+memory_internal.o : memory_internal.c memory_internal.h memory_interface.h 
+	gcc -c memory_internal.c
+
+default_strategies.o : default_strategies.c default_strategies.h memory_internal.h 
+	gcc -c  default_strategies.c
+
+core.o : core.c core.h default_strategies.h memory_internal.h
+	gcc -c  core.c
+
+testcore.o : testcore.c core.h
+	gcc -c testcore.c
+
+testcore : testcore.o core.o default_strategies.o memory_internal.o
+	gcc testcore.o core.o default_strategies.o memory_internal.o -o testcore
+
 firstfit : memory.o testFirstFit.o
 	gcc memory.o testFirstFit.o -o firstfit
 
