@@ -114,3 +114,18 @@
 [DEBUG] 2021-04-04 19:15:06 Read 'f:1'
 [DEBUG] 2021-04-04 19:15:06 removeBlock() = 8
 [DEBUG] 2021-04-04 19:15:06 Read 'a:3:2'
+[DEBUG] 2021-04-04 19:16:15 Launching
+[INFO] 2021-04-04 19:16:15 Running cli mode
+[DEBUG] 2021-04-04 19:16:15 Read 's:10'
+[DEBUG] 2021-04-04 19:16:15 Read 'a:8:1'
+[DEBUG] 2021-04-04 19:16:15 Read 'f:1'
+[DEBUG] 2021-04-04 19:16:15 removeBlock() = 8
+[DEBUG] 2021-04-04 19:16:15 Read 'a:3:2'
+[DEBUG] 2021-04-04 19:16:21 Launching
+[INFO] 2021-04-04 19:16:21 Running cli mode
+[DEBUG] 2021-04-04 19:16:21 Read 's:10'
+[DEBUG] 2021-04-04 19:16:21 Read 'a:8:1'
+[DEBUG] 2021-04-04 19:16:21 Read 'f:1'
+[DEBUG] 2021-04-04 19:16:21 removeBlock() = 8
+[DEBUG] 2021-04-04 19:16:21 Read 'a:3:2'
+[DEBUG] 2021-04-04 19:16:21 Read 'a:4:3'

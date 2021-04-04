@@ -150,11 +150,9 @@ void addBlock(BlockListPtr blockList, int size, int position) {
  */
 BlockListPtr *searchBlock(BlockListPtr *blockList, int position) {
     if (isEmptyBlockList(*blockList)) {
-        printf("empty\n");
         return blockList;
     }
     else if (getBlockPosition(*blockList) == position) {
-        printf("match\n");
         return blockList;
     }
     else {
@@ -165,8 +163,6 @@ BlockListPtr *searchBlock(BlockListPtr *blockList, int position) {
 int removeBlock(BlockListPtr *blockList, int position, MemoryPtr memory) {
     BlockListPtr *block;
     int r = -1;
-    printf("here\n");
-    printf("bl = %p\n", *blockList);
     if ((block = searchBlock(blockList, position)) != NULL) {
         int blockSize = getBlockSize(*block);
         r = blockSize;
