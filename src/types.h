@@ -12,6 +12,10 @@ enum MyAllocModeType {
 #define RUN_BATCH RUN_BATCH
 };
 
+/**
+ * @brief Supported command types
+ * 
+ */
 typedef enum {
   COMMAND_INIT,
   COMMAND_ALLOC,
@@ -22,6 +26,10 @@ typedef enum {
 #define COMMAND_CODES_COUNT 3
 extern const char *commandCodes[COMMAND_CODES_COUNT];
 
+/**
+ * @brief Log Severity Types
+ * 
+ */
 typedef enum {
     SEVERITY_EMERGENCY,
     SEVERITY_ALERT,

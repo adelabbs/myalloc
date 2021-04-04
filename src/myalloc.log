@@ -14,3 +14,19 @@
 [INFO] 2021-04-04 17:23:46 Running cli mode
 [DEBUG] 2021-04-04 17:23:46 Read 's:1000'
 [DEBUG] 2021-04-04 17:23:46 Read 'a:15:1'
+[DEBUG] 2021-04-04 18:31:26 Launching
+[DEBUG] 2021-04-04 18:37:52 Launching
+[INFO] 2021-04-04 18:37:52 Running cli mode
+[DEBUG] 2021-04-04 18:37:52 Read 's:100'
+[DEBUG] 2021-04-04 18:38:01 Launching
+[INFO] 2021-04-04 18:38:01 Running cli mode
+[DEBUG] 2021-04-04 18:38:01 Read 'a:15:1'
+[ERROR] 2021-04-04 18:38:01 Memory not initialized
+[DEBUG] 2021-04-04 18:39:07 Launching
+[INFO] 2021-04-04 18:39:07 Running cli mode
+[DEBUG] 2021-04-04 18:39:07 Read 'a:15:1'
+[ERROR] 2021-04-04 18:39:07 Memory not initialized
+[DEBUG] 2021-04-04 18:40:26 Launching
+[INFO] 2021-04-04 18:40:26 Running cli mode
+[DEBUG] 2021-04-04 18:40:26 Read 'a:15:1'
+[ERROR] 2021-04-04 18:40:26 Memory not initialized

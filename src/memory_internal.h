@@ -2,6 +2,10 @@
 #define _MEMORY_INTERNAL_H_
 #include "memory_interface.h"
 
+/**
+ * @brief The internal implementaion of the Memory structure
+ * 
+ */
 struct Memory {
     int size;
     int availableSpace;
@@ -11,13 +15,23 @@ struct Memory {
     MemoryFreeStrategy freeStrategy;
 };
 
+/**
+ * @brief The internal implementation of the BlockList structure
+ * 
+ */
 struct BlockList {
     int position;
     int size;
     struct BlockList *next;
 };
 
+/**
+ * @brief A memory pointer is declared as a global variable.
+ * 
+ */
 MemoryPtr memory;
+
+/*********Utility functions*******/
 
 int getMemorySize(MemoryPtr memory);
 int getMemoryAvailableSpace(MemoryPtr memory);

@@ -6,6 +6,13 @@
 extern char *optarg;
 extern int optind;
 
+/**
+ * @brief The cli mode processing function
+ * 
+ * @param argc
+ * @param argv 
+ * @return int 0 if normal
+ */
 int cli(int argc, char *argv[]) {
     InputHandler handler;
     initInputHandler(&handler);
@@ -17,4 +24,5 @@ int cli(int argc, char *argv[]) {
         handleInput(&handler, argv[optind], strlen(argv[optind]));
     }
     destroyInputHandler(&handler);
+    return 0;
 }
