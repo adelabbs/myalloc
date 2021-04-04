@@ -29,6 +29,14 @@ void *myalloc(int nBytes) {
   return getMemoryBlock(memory) + position;
 }
 
+void *realloc() {
+  for (int i = 0, i < MemorySpace.countBlocks(), i++) {
+   int position = MemorySpace.getBlockList().getBlockPosition(i);
+  }
+  displayMemorySpace();
+  return getMemoryBlock(memory) + position;
+}
+
 int myfree(void *p) {
   /* Check if the pointer is valid*/
   if (p == NULL) {
